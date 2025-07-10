@@ -2,14 +2,17 @@ import Banner from '../components/Banner';
 import Products from '../components/Products';
 import Collection from '../components/Collection';
 import ContactDiv from '../components/ContactDiv';
-import BlogSlide from '../components/BlogSlide';
 import SlidingCategories from '../components/SlidingCategories';
 import MumisPasitiki from '../components/MumisPasitiki';
 import IconCards from '../components/IconCards';
 import ContactForm from '../components/ContactForm';
-import Hero1 from '../components/Hero1';
 import { DefaultSeo } from 'next-seo';
-import ClientOnly from '../components/ClientOnly';
+import dynamic from 'next/dynamic';
+
+const Hero1 = dynamic(() => import('../components/Hero1'), { ssr: false });
+const BlogSlide = dynamic(() => import('../components/BlogSlide'), {
+  ssr: false,
+});
 
 export default function Home({
   newProducts,
@@ -48,15 +51,11 @@ export default function Home({
         }}
       />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <ClientOnly>
-        <Hero1 mediaData={mediaData} />
-      </ClientOnly>
+      <Hero1 mediaData={mediaData} />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <IconCards />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <ClientOnly>
-        <BlogSlide posts={blogPosts} />
-      </ClientOnly>
+      <BlogSlide posts={blogPosts} />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <Products products={newProducts} />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
