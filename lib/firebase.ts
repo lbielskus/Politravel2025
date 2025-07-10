@@ -10,6 +10,13 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+// Throw a clear error if the project ID is not set in the environment.
+if (!firebaseConfig.projectId) {
+  throw new Error(
+    'Firebase project ID is not set. Please check your Vercel environment variables.'
+  );
+}
+
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
