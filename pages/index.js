@@ -9,6 +9,7 @@ import IconCards from '../components/IconCards';
 import ContactForm from '../components/ContactForm';
 import Hero1 from '../components/Hero1';
 import { DefaultSeo } from 'next-seo';
+import ClientOnly from '../components/ClientOnly';
 
 export default function Home({
   newProducts,
@@ -47,7 +48,9 @@ export default function Home({
         }}
       />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <Hero1 mediaData={mediaData} />
+      <ClientOnly>
+        <Hero1 mediaData={mediaData} />
+      </ClientOnly>
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <IconCards />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
