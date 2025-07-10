@@ -8,6 +8,8 @@ import IconCards from '../components/IconCards';
 import ContactForm from '../components/ContactForm';
 import { DefaultSeo } from 'next-seo';
 import dynamic from 'next/dynamic';
+import { db } from '../lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 const Hero1 = dynamic(() => import('../components/Hero1'), { ssr: false });
 const BlogSlide = dynamic(() => import('../components/BlogSlide'), {
@@ -70,46 +72,83 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const baseUrl = req.headers['x-forwarded-proto']
-    ? `${req.headers['x-forwarded-proto']}://${req.headers.host}`
-    : `http://${req.headers.host}`;
+export async function getServerSideProps() {
+  try {
+    // Fetch products
+    const productsSnapshot = await getDocs(collection(db, 'products'));
+    const products = productsSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
-  // Fetch from your API routes (which use Firestore)
-  const [productsRes, blogsRes, categoriesRes, mediaRes] = await Promise.all([
-    fetch(`${baseUrl}/api/products`),
-    fetch(`${baseUrl}/api/blogs`),
-    fetch(`${baseUrl}/api/categories`),
-    fetch(`${baseUrl}/api/images`),
-  ]);
+    // Fetch blogs
+    const blogsSnapshot = await getDocs(collection(db, 'blog'));
+    const blogPosts = blogsSnapshot.docs.map((doc) => {
+      const data = doc.data();
+      let createdAt = null;
+      if (
+        data.createdAt &&
+        typeof data.createdAt === 'object' &&
+        data.createdAt.seconds
+      ) {
+        createdAt = new Date(data.createdAt.seconds * 1000).toISOString();
+      } else if (data.createdAt) {
+        createdAt = data.createdAt;
+      }
+      return {
+        id: doc.id,
+        ...data,
+        createdAt,
+      };
+    });
 
-  const [products, blogPosts, categories, mediaData] = await Promise.all([
-    productsRes.json(),
-    blogsRes.json(),
-    categoriesRes.json(),
-    mediaRes.json(),
-  ]);
+    // Fetch categories
+    const categoriesSnapshot = await getDocs(collection(db, 'categories'));
+    const categories = categoriesSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
-  // Example: filter/slice as needed for your UI
-  const newProducts = products.slice(0, 3);
-  const collectionProduct1 = products[0] || null;
-  const pricingProducts = products.filter((p) =>
-    [
-      '65e64f0f283b34d56e536412',
-      '65ec4f3fcf19fe7cb322f75e',
-      '65ec50cbcf19fe7cb322f775',
-      '65ec526ccf19fe7cb322f782',
-    ].includes(p.id)
-  );
+    // Fetch media
+    const mediaSnapshot = await getDocs(collection(db, 'media'));
+    const mediaData = mediaSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
-  return {
-    props: {
-      collectionProduct1,
-      newProducts,
-      blogPosts,
-      pricingProducts,
-      categories,
-      mediaData,
-    },
-  };
+    // Process data
+    const newProducts = products.slice(0, 3);
+    const collectionProduct1 = products[0] || null;
+    const pricingProducts = products.filter((p) =>
+      [
+        '65e64f0f283b34d56e536412',
+        '65ec4f3fcf19fe7cb322f75e',
+        '65ec50cbcf19fe7cb322f775',
+        '65ec526ccf19fe7cb322f782',
+      ].includes(p.id)
+    );
+
+    return {
+      props: {
+        collectionProduct1,
+        newProducts,
+        blogPosts: JSON.parse(JSON.stringify(blogPosts)), // Serialize blogPosts
+        pricingProducts,
+        categories,
+        mediaData,
+      },
+    };
+  } catch (error) {
+    console.error('Error in getServerSideProps:', error);
+    return {
+      props: {
+        collectionProduct1: null,
+        newProducts: [],
+        blogPosts: [],
+        pricingProducts: [],
+        categories: [],
+        mediaData: [],
+      },
+    };
+  }
 }
