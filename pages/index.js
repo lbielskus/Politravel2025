@@ -54,7 +54,9 @@ export default function Home({
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <IconCards />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <BlogSlide posts={blogPosts} />
+      <ClientOnly>
+        <BlogSlide posts={blogPosts} />
+      </ClientOnly>
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <Products products={newProducts} />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
