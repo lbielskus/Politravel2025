@@ -19,37 +19,35 @@ const Hero1big = ({ mediaData }) => {
   };
 
   return (
-    <section
-      className='flex justify-center items-center w-full relative'
-      style={{ height: '350px' }}
-    >
+    <section className='flex justify-center items-center w-full relative aspect-[16/5]'>
       {visibleMedia.map((media, index) => (
         <div key={index} className='relative w-full h-full'>
           {media.firstBanner && index === startIndex && (
             <>
-              <Image
-                src={media.images[0] || '/Placeholder.png'}
-                alt={media.name}
-                width={1200}
-                height={350}
-                style={{ objectFit: 'cover' }}
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-                className='w-full h-full object-cover'
-              />
-              <div
-                className='absolute inset-0 flex flex-col justify-center items-center text-center text-white p-4'
-                style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }} // Add a slight overlay for readability
-              >
-                <h2 className='text-3xl font-bold'>{media.name}</h2>
-                <p className='text-lg mt-4'>{media.description}</p>
-                <button
-                  className='mt-4 bg-button hover:bg-hover3 text-white  py-2 px-4 rounded'
-                  onClick={handleButtonClick}
+              <div className='absolute inset-0 w-full h-full'>
+                <Image
+                  src={media.images[0] || '/Placeholder.png'}
+                  alt={media.name}
+                  fill
+                  className='object-cover w-full h-full'
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                  priority
+                />
+                <div
+                  className='absolute inset-0 flex flex-col justify-center items-center text-center text-white p-4'
+                  style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}
                 >
-                  Visos kelionės
-                </button>
+                  <h2 className='text-3xl font-bold'>{media.name}</h2>
+                  <p className='text-lg mt-4'>{media.description}</p>
+                  <button
+                    className='mt-4 bg-button hover:bg-hover3 text-white py-2 px-4 rounded'
+                    onClick={handleButtonClick}
+                  >
+                    Visos kelionės
+                  </button>
+                </div>
               </div>
             </>
           )}

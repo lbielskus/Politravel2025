@@ -80,22 +80,15 @@ const BlogSlide = ({ posts }) => {
           <div className='bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100'>
             <div className='grid lg:grid-cols-2 gap-0'>
               {/* Image Section */}
-              <div className='relative h-64 lg:h-full min-h-[400px]'>
-                {currentPost.image ? (
-                  <Image
-                    src={currentPost.image}
-                    alt={currentPost.title}
-                    width={600}
-                    height={400}
-                    className='object-cover w-full h-full'
-                  />
-                ) : (
-                  <div className='w-full h-full bg-gradient-to-br from-button/20 to-primary/20 flex items-center justify-center'>
-                    <span className='text-gray-500'>
-                      Nuotrauka nepasiekiama
-                    </span>
-                  </div>
-                )}
+              <div className='relative aspect-[4/3] w-full min-h-[200px]'>
+                <Image
+                  src={currentPost.image || '/Placeholder.png'}
+                  alt={currentPost.title}
+                  fill
+                  className='object-cover w-full h-full'
+                  sizes='(max-width: 768px) 100vw, 50vw'
+                  priority
+                />
                 <div className='absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent' />
 
                 {/* Navigation arrows */}

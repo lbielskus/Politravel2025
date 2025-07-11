@@ -27,22 +27,24 @@ export default function Hero({ product }) {
               <div className='mt-10 flex flex-col max-sm:items-center max-sm:justify-center'>
                 <div className='lg:hidden relative '>
                   <div className='grid grid-cols-1 gap-6'>
-                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform rotate-3 translate-x-4 hover:-rotate-6 hover:translate-x-8 transition-transform duration-300 ease-in-out'>
+                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform rotate-3 translate-x-4 hover:-rotate-6 hover:translate-x-8 transition-transform duration-300 ease-in-out relative aspect-[9/10]'>
                       <Image
-                        src={product.images[0]}
+                        src={product.images[0] || '/Placeholder.png'}
                         alt=''
-                        width={288}
-                        height={320}
-                        style={{ objectFit: 'cover' }}
+                        fill
+                        className='object-cover rounded-lg w-full h-full'
+                        sizes='(max-width: 768px) 100vw, 50vw'
+                        priority
                       />
                     </div>
-                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform -rotate-2 translate-x-2 hover:rotate-4 hover:translate-x-4 transition-transform duration-300 ease-in-out'>
+                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform -rotate-2 translate-x-2 hover:rotate-4 hover:translate-x-4 transition-transform duration-300 ease-in-out relative aspect-[9/10]'>
                       <Image
-                        src={product.images[1]}
+                        src={product.images[1] || '/Placeholder.png'}
                         alt=''
-                        width={288}
-                        height={320}
-                        style={{ objectFit: 'cover' }}
+                        fill
+                        className='object-cover rounded-lg w-full h-full'
+                        sizes='(max-width: 768px) 100vw, 50vw'
+                        priority
                       />
                     </div>
                   </div>
@@ -65,42 +67,46 @@ export default function Hero({ product }) {
               <div className='hidden lg:block absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8'>
                 <div className='flex items-center space-x-6 lg:space-x-8'>
                   <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
-                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform rotate-3 translate-x-4 hover:-rotate-6 hover:translate-x-8 transition-transform duration-300 ease-in-out'>
+                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform rotate-3 translate-x-4 hover:-rotate-6 hover:translate-x-8 transition-transform duration-300 ease-in-out relative aspect-[9/10]'>
                       <Image
-                        src={product.images[0]}
+                        src={product.images[0] || '/Placeholder.png'}
                         alt=''
-                        width={288}
-                        height={320}
-                        style={{ objectFit: 'cover' }}
+                        fill
+                        className='object-cover rounded-lg w-full h-full'
+                        sizes='(max-width: 768px) 100vw, 50vw'
+                        priority
                       />
                     </div>
-                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform -rotate-2 translate-x-2 hover:rotate-4 hover:translate-x-4 transition-transform duration-300 ease-in-out'>
+                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform -rotate-2 translate-x-2 hover:rotate-4 hover:translate-x-4 transition-transform duration-300 ease-in-out relative aspect-[9/10]'>
                       <Image
-                        src={product.images[1]}
+                        src={product.images[1] || '/Placeholder.png'}
                         alt=''
-                        width={288}
-                        height={320}
-                        style={{ objectFit: 'cover' }}
+                        fill
+                        className='object-cover rounded-lg w-full h-full'
+                        sizes='(max-width: 768px) 100vw, 50vw'
+                        priority
                       />
                     </div>
                   </div>
                   <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
-                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform rotate-1 translate-x-3 hover:-rotate-2 hover:translate-x-4 transition-transform duration-300 ease-in-out'>
+                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform rotate-1 translate-x-3 hover:-rotate-2 hover:translate-x-4 transition-transform duration-300 ease-in-out relative aspect-[9/10]'>
                       <Image
-                        src={product.images[2]}
+                        src={product.images[2] || '/Placeholder.png'}
                         alt=''
-                        width={288}
-                        height={320}
-                        style={{ objectFit: 'cover' }}
+                        fill
+                        className='object-cover rounded-lg w-full h-full'
+                        sizes='(max-width: 768px) 100vw, 50vw'
+                        priority
                       />
                     </div>
-                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform -rotate-4 translate-x-2 hover:rotate-8 hover:translate-x-3 transition-transform duration-300 ease-in-out'>
+                    <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform -rotate-4 translate-x-2 hover:rotate-8 hover:translate-x-3 transition-transform duration-300 ease-in-out relative aspect-[9/10]'>
                       <Image
-                        src={product.images[3]}
+                        src={product.images[3] || '/Placeholder.png'}
                         alt=''
-                        width={288}
-                        height={320}
-                        style={{ objectFit: 'cover' }}
+                        fill
+                        className='object-cover rounded-lg w-full h-full'
+                        sizes='(max-width: 768px) 100vw, 50vw'
+                        priority
                       />
                     </div>
                   </div>

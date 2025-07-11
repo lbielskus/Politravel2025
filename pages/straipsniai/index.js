@@ -116,19 +116,13 @@ export default function Blog({ posts }) {
                 >
                   {/* Featured Image */}
                   <div className='relative aspect-[4/3] w-full overflow-hidden'>
-                    {post.images && post.images.length > 0 ? (
-                      <Image
-                        src={post.images[0]}
-                        alt={post.title}
-                        fill
-                        className='object-cover transition-transform duration-500 group-hover:scale-110 rounded-t-2xl'
-                        sizes='(max-width: 768px) 100vw, 33vw'
-                      />
-                    ) : (
-                      <div className='h-full bg-gradient-to-br from-button/20 to-hover3/20 flex items-center justify-center'>
-                        <User className='w-16 h-16 text-button/40' />
-                      </div>
-                    )}
+                    <Image
+                      src={post.images?.[0] || '/Placeholder.png'}
+                      alt={post.title}
+                      fill
+                      className='object-cover transition-transform duration-500 group-hover:scale-110 rounded-t-2xl'
+                      sizes='(max-width: 768px) 100vw, 33vw'
+                    />
                     <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent' />
 
                     {/* Category badge if available */}

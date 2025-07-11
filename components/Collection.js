@@ -54,12 +54,12 @@ export default function Collection({ product }) {
                       <li>
                         <div className='block group relative w-full aspect-square'>
                           <Image
-                            src={product.images[0]}
+                            src={product.images[0] || '/Placeholder.png'}
                             alt=''
-                            width={300}
-                            height={300}
-                            style={{ objectFit: 'cover' }}
-                            className='rounded w-full h-full'
+                            fill
+                            className='rounded w-full h-full object-cover'
+                            sizes='(max-width: 768px) 100vw, 50vw'
+                            priority
                           />
                         </div>
                       </li>
@@ -67,12 +67,12 @@ export default function Collection({ product }) {
                       <li>
                         <div className='block group relative w-full aspect-square'>
                           <Image
-                            src={product.images[1]}
+                            src={product.images[1] || '/Placeholder.png'}
                             alt=''
-                            width={300}
-                            height={300}
-                            style={{ objectFit: 'cover' }}
-                            className='rounded w-full h-full'
+                            fill
+                            className='rounded w-full h-full object-cover'
+                            sizes='(max-width: 768px) 100vw, 50vw'
+                            priority
                           />
                         </div>
                       </li>

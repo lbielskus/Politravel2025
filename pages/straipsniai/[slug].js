@@ -67,27 +67,15 @@ export default function BlogPost({ post }) {
           <div className='max-w-4xl mx-auto'>
             {/* Header */}
             <div className='bg-white rounded-2xl shadow-lg overflow-hidden mb-8'>
-              {post.images && post.images.length > 0 ? (
-                <div className='relative aspect-[4/3] w-full rounded-t-2xl overflow-hidden'>
-                  <Image
-                    src={post.images[0]}
-                    alt={post.title}
-                    fill
-                    className='object-cover w-full h-full'
-                    sizes='(max-width: 768px) 100vw, 50vw'
-                  />
-                </div>
-              ) : post.image ? (
-                <div className='relative aspect-[4/3] w-full rounded-t-2xl overflow-hidden'>
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className='object-cover w-full h-full'
-                    sizes='(max-width: 768px) 100vw, 50vw'
-                  />
-                </div>
-              ) : null}
+              <div className='relative aspect-[4/3] w-full rounded-t-2xl overflow-hidden'>
+                <Image
+                  src={post.images?.[0] || post.image || '/Placeholder.png'}
+                  alt={post.title}
+                  fill
+                  className='object-cover w-full h-full'
+                  sizes='(max-width: 768px) 100vw, 50vw'
+                />
+              </div>
 
               <div className='p-8 overflow-hidden'>
                 <div className='flex items-center gap-4 text-sm text-gray-500 mb-4'>
