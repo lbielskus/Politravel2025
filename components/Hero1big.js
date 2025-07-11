@@ -28,7 +28,7 @@ const Hero1big = ({ mediaData }) => {
           {media.firstBanner && index === startIndex && (
             <>
               <Image
-                src={media.images[0]}
+                src={media.images[0] || '/Placeholder.png'}
                 alt={media.name}
                 width={1200}
                 height={350}

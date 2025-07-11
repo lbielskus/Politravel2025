@@ -29,7 +29,7 @@ const Hero1small = ({ mediaData }) => {
             <>
               <div className='w-full h-[200px] sm:w-[400px] mx-auto px-6 '>
                 <Image
-                  src={media.images[0]}
+                  src={media.images[0] || '/Placeholder.png'}
                   alt={media.name}
                   width={326}
                   height={164}

@@ -55,7 +55,7 @@ const Hero2 = () => {
             </div>
             {media.images && media.images.length > 0 && (
               <Image
-                src={media.images[0]}
+                src={media.images[0] || '/Placeholder.png'}
                 alt={media.name}
                 width={180}
                 height={180}

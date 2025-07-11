@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 
 import { FaBus } from 'react-icons/fa';
 import { FaPlaneUp } from 'react-icons/fa6';
@@ -18,9 +18,11 @@ const TopBanner = () => {
         <Image
           src='/logo1-01.png'
           alt='Logo'
-          className='h-[90px] w-auto cursor-pointer'
-          width={210}
-          height={105}
+          height={60}
+          width={110}
+          style={{height: '60px', width: 'auto'}}
+          className='cursor-pointer'
+          priority
         />
       </Link>
 

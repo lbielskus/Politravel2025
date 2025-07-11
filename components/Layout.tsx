@@ -28,6 +28,7 @@ const Layout = ({
   usePerformanceMonitoring();
 
   return (
+    <>
     <div
       className={`gpu-accelerate min-h-screen max-w-screen-2xl mx-auto bg-background sm:px-6 ${className}`}
     >
@@ -66,8 +67,10 @@ const Layout = ({
       <Footer />
       <ContactButton />
       <BackToTopButton />
-      <CookieConsent />
+      {/* CookieConsent moved outside */}
     </div>
+    <CookieConsent />
+    </>
   );
 };
 

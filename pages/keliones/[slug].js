@@ -366,6 +366,7 @@ export default function ProductPage({ product }) {
                         title='✉️ Gauti pasiūlymą'
                         type='button'
                         onClick={() => router.push('/kontaktai')}
+                        className='bg-button hover:bg-hover3 text-white'
                       />
                     </div>
                   </div>
@@ -383,7 +384,8 @@ export default function ProductPage({ product }) {
             />
 
             {/* Expandable Days */}
-            {product.travelDays && product.travelDays.length > 0 && (
+            {Array.isArray(product.travelDays) &&
+            product.travelDays.length > 0 ? (
               <div className='mb-8'>
                 <h3 className='text-xl font-semibold mb-4'>Kelionės dienos</h3>
                 <div className='space-y-2'>
@@ -404,7 +406,7 @@ export default function ProductPage({ product }) {
                         )}
                       </button>
                       {expandedDay === day.day && (
-                        <div className='px-4 py-3 bg-green-50 border-t'>
+                        <div className='px-4 py-3 bg-white border border-gray-200 rounded-b-lg'>
                           <p className='text-gray-700 whitespace-pre-line'>
                             {day.description}
                           </p>
@@ -413,6 +415,10 @@ export default function ProductPage({ product }) {
                     </div>
                   ))}
                 </div>
+              </div>
+            ) : (
+              <div className='mb-8 text-gray-500'>
+                Kelionės dienų informacija nerasta.
               </div>
             )}
 
@@ -454,6 +460,7 @@ export default function ProductPage({ product }) {
                   title='Gauti pasiūlymą'
                   type='button'
                   onClick={() => router.push('/kontaktai')}
+                  className='bg-button hover:bg-hover3 text-white'
                 />
               </div>
             </div>

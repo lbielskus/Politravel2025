@@ -45,6 +45,14 @@ const findBySlug = (items, slug) => {
   );
 };
 
+// Add a mapping from slug to category name for main categories
+const slugToCategoryName = {
+  'keliones-autobusu': 'Kelionės autobusu',
+  'keliones-lektuvu': 'Kelionės lėktuvu',
+  'aktyvios-keliones': 'Aktyvios kelionės',
+  'teatralizuotos-ekskursijos': 'Teatralizuotos ekskursijos',
+};
+
 const FloatingGlassCard = dynamic(
   () => import('../../components/Cards/FloatingGlassCard'),
   {
@@ -333,8 +341,14 @@ export async function getServerSideProps({ params, req }) {
     if (!categoriesRes.ok) throw new Error('Failed to fetch categories');
     const categories = await categoriesRes.json();
 
-    // Find the category by slug
-    const categoryData = findBySlug(categories, slug);
+    // Map slug to category name if needed
+    const mappedCategoryName = slugToCategoryName[slug] || null;
+    let categoryData = null;
+    if (mappedCategoryName) {
+      categoryData = categories.find((cat) => cat.name === mappedCategoryName);
+    } else {
+      categoryData = findBySlug(categories, slug);
+    }
     if (!categoryData) {
       return { notFound: true };
     }
@@ -354,8 +368,6 @@ export async function getServerSideProps({ params, req }) {
       },
     };
   } catch (error) {
-    // Optionally log error for debugging
-    // console.error('SSR error in kategorijos/[slug]:', error);
     return { notFound: true };
   }
 }

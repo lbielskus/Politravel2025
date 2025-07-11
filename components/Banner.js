@@ -5,9 +5,9 @@ const Banner = ({ imageUrl, title }) => {
   return (
     <section className='flex justify-center items-center bg-gray-200 rounded-xl '>
       {imageUrl ? (
-        <div className='aspect-[16/5] relative w-full rounded-xl shadow-2xl'>
+        <div className='aspect-[16/3] relative w-full rounded-xl shadow-2xl'>
           <Image
-            src={imageUrl}
+            src={imageUrl || '/Placeholder.png'}
             alt={title}
             fill
             className='object-cover rounded-2xl'

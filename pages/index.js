@@ -65,6 +65,8 @@ export default function Home({
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <Banner imageUrl={imageUrl} title='Banner' />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
+      <IconCards />
+      <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <MumisPasitiki />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <ContactForm />

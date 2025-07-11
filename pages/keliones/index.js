@@ -35,12 +35,14 @@ export default function Products({ allProducts = [] }) {
         filtered = allProducts || [];
       } else {
         const lowerCaseQuery = searchQuery.toLowerCase();
-        filtered = (allProducts || []).filter(
-          (product) =>
-            product.title.toLowerCase().includes(lowerCaseQuery) ||
-            product.brand?.toLowerCase().includes(lowerCaseQuery) ||
-            product.gender?.toLowerCase().includes(lowerCaseQuery)
-        );
+        filtered = (allProducts || []).filter((product) => {
+          // Search in all string fields
+          return Object.values(product).some(
+            (value) =>
+              typeof value === 'string' &&
+              value.toLowerCase().includes(lowerCaseQuery)
+          );
+        });
       }
 
       // Sort products by date (newest first)

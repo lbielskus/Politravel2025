@@ -64,7 +64,7 @@ const FloatingGlassCard = ({
         <div className='relative overflow-hidden'>
           <div className='aspect-[4/3] relative w-full'>
             <Image
-              src={product.images?.[0] || '/placeholder.svg'}
+              src={product.images?.[0] || '/Placeholder.png'}
               alt={product.title}
               fill
               className='object-cover transition-transform duration-500 group-hover:scale-105 rounded-t-2xl'
@@ -105,11 +105,21 @@ const FloatingGlassCard = ({
         <div className='p-6 space-y-4 flex-grow flex flex-col'>
           {/* Country */}
           <div className='flex items-center gap-2'>
-            <span className='text-xl'>{getCountryFlag(product.brand)}</span>
+            <span className='text-xl'>
+              {getCountryFlag(product.country || product.brand)}
+            </span>
             <span className='text-sm font-medium text-gray-600'>
-              {product.brand}
+              {product.country || product.brand}
             </span>
           </div>
+
+          {/* Cities */}
+          {product.cities && (
+            <div className='flex items-center gap-2 text-sm text-gray-500'>
+              <Globe className='w-4 h-4' />
+              <span>{product.cities}</span>
+            </div>
+          )}
 
           {/* Title with fixed height */}
           <h3 className='text-xl font-bold text-gray-700 group-hover:text-primary transition-colors duration-300 h-14 line-clamp-2 overflow-hidden'>

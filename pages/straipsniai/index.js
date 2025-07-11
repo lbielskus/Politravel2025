@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import { createSlug } from '../../utils/slugify';
 import { Calendar, Clock, ArrowRight, User } from 'lucide-react';
@@ -115,14 +115,14 @@ export default function Blog({ posts }) {
                   className='group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden h-full flex flex-col'
                 >
                   {/* Featured Image */}
-                  <div className='relative h-48 overflow-hidden'>
+                  <div className='relative aspect-[4/3] w-full overflow-hidden'>
                     {post.images && post.images.length > 0 ? (
                       <Image
                         src={post.images[0]}
                         alt={post.title}
-                        width={400}
-                        height={192}
-                        className='object-cover transition-transform duration-500 group-hover:scale-110 w-full h-48'
+                        fill
+                        className='object-cover transition-transform duration-500 group-hover:scale-110 rounded-t-2xl'
+                        sizes='(max-width: 768px) 100vw, 33vw'
                       />
                     ) : (
                       <div className='h-full bg-gradient-to-br from-button/20 to-hover3/20 flex items-center justify-center'>

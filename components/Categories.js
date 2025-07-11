@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import { createSlug } from '../utils/slugify';
 import { ArrowRight, MapPin, Users, Camera } from 'lucide-react';
 
@@ -32,15 +32,14 @@ const Categories = ({ categories }) => {
               >
                 <div className='group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden h-full flex flex-col'>
                   {/* Image */}
-                  <div className='relative h-64 overflow-hidden'>
+                  <div className='relative aspect-[4/3] w-full overflow-hidden'>
                     {category.images && category.images.length > 0 ? (
                       <Image
-                        src={category.images[0]}
+                        src={category.images[0] || '/Placeholder.png'}
                         alt={category.name}
-                        width={400}
-                        height={256}
-                        style={{ objectFit: 'cover' }}
-                        className='transition-transform duration-500 group-hover:scale-110 w-full h-64'
+                        fill
+                        className='object-cover transition-transform duration-500 group-hover:scale-110 rounded-t-2xl'
+                        sizes='(max-width: 768px) 100vw, 33vw'
                       />
                     ) : (
                       <div className='h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center'>

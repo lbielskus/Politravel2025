@@ -116,7 +116,7 @@ const SlidingCategories = ({ categories }) => {
                   <div className='absolute inset-0'>
                     {category.images && category.images.length > 0 ? (
                       <Image
-                        src={category.images[0]}
+                        src={category.images[0] || '/Placeholder.png'}
                         alt={category.name}
                         width={500}
                         height={300}

@@ -28,12 +28,11 @@ const ApieMus = () => {
           cardType: 'summary_large_image',
         }}
       />
-      <Layout>
-        <div className='container mx-auto px-4 py-8 text-center'>
-          <h1 className='text-3xl font-semibold mb-4'>Apie mus</h1>
-          <p className='text-lg mb-4'>Apie mus</p>
-        </div>
-      </Layout>
+      {/* Remove <Layout> wrapper, keep only the content */}
+      <div className='container mx-auto px-4 py-8 text-center'>
+        <h1 className='text-3xl font-semibold mb-4'>Apie mus</h1>
+        <p className='text-lg mb-4'>Apie mus</p>
+      </div>
     </>
   );
 };

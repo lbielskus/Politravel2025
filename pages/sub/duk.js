@@ -28,14 +28,13 @@ const DUK = () => {
           cardType: 'summary_large_image',
         }}
       />
-      <Layout>
-        <div className='container mx-auto px-4 py-8 text-center'>
-          <h1 className='text-3xl font-semibold mb-4'>
-            Dažniausiai užduodami klausimai
-          </h1>
-          <p className='text-lg mb-4'>D. U. K.</p>
-        </div>
-      </Layout>
+      {/* Remove <Layout> wrapper, keep only the content */}
+      <div className='container mx-auto px-4 py-8 text-center'>
+        <h1 className='text-3xl font-semibold mb-4'>
+          Dažniausiai užduodami klausimai
+        </h1>
+        <p className='text-lg mb-4'>D. U. K.</p>
+      </div>
     </>
   );
 };

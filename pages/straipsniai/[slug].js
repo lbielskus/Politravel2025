@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import { findBySlug } from '../../utils/slugify';
 
@@ -67,24 +67,38 @@ export default function BlogPost({ post }) {
           <div className='max-w-4xl mx-auto'>
             {/* Header */}
             <div className='bg-white rounded-2xl shadow-lg overflow-hidden mb-8'>
-              {post.image && (
-                <div className='relative w-full h-96'>
+              {post.images && post.images.length > 0 ? (
+                <div className='relative aspect-[4/3] w-full rounded-t-2xl overflow-hidden'>
+                  <Image
+                    src={post.images[0]}
+                    alt={post.title}
+                    fill
+                    className='object-cover w-full h-full'
+                    sizes='(max-width: 768px) 100vw, 50vw'
+                  />
+                </div>
+              ) : post.image ? (
+                <div className='relative aspect-[4/3] w-full rounded-t-2xl overflow-hidden'>
                   <Image
                     src={post.image}
                     alt={post.title}
-                    width={1200}
-                    height={384}
-                    className='object-cover w-full h-96'
+                    fill
+                    className='object-cover w-full h-full'
+                    sizes='(max-width: 768px) 100vw, 50vw'
                   />
                 </div>
-              )}
+              ) : null}
 
               <div className='p-8 overflow-hidden'>
                 <div className='flex items-center gap-4 text-sm text-gray-500 mb-4'>
                   <span>Autorius: {post.author || 'PoliTravel'}</span>
-                  {post.date && (
+                  {(post.createdAt || post.date) && (
                     <span>
-                      Data: {new Date(post.date).toLocaleDateString('lt-LT')}
+                      Data:{' '}
+                      {new Date(post.createdAt || post.date).toLocaleDateString(
+                        'lt-LT',
+                        { year: 'numeric', month: 'long', day: 'numeric' }
+                      )}
                     </span>
                   )}
                 </div>
