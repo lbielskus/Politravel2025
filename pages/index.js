@@ -126,6 +126,7 @@ export async function getServerSideProps() {
         '65ec4f3fcf19fe7cb322f75e',
         '65ec50cbcf19fe7cb322f775',
         '65ec526ccf19fe7cb322f782',
+        '65ec526ccf19fe7cb322f783',
       ].includes(p.id)
     );
 
