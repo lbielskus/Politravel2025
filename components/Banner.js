@@ -1,24 +1,20 @@
 import React from 'react';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 
 const Banner = ({ imageUrl, title }) => {
   return (
     <section className='flex justify-center items-center bg-gray-200 rounded-xl '>
       {imageUrl ? (
-        <div
-          className='relative w-full h-0 rounded-xl shadow-2xl'
-          style={{ paddingBottom: '24%' }}
-        >
+        <div className='aspect-[16/5] relative w-full rounded-xl shadow-2xl'>
           <Image
             src={imageUrl}
             alt={title}
-            width={1200}
-            height={288}
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            fill
+            className='object-cover rounded-2xl'
+            sizes='100vw'
             onError={(e) => {
               e.target.style.display = 'none';
             }}
-            className='rounded-2xl w-full h-full'
           />
         </div>
       ) : (

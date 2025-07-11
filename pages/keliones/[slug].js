@@ -143,16 +143,22 @@ export default function ProductPage({ product }) {
   }
 
   if (product) {
-    const sanitizedDescriptionText = sanitizeHtml(product.description, {
-      allowedTags: [],
+    const sanitizedShortDescription = sanitizeHtml(
+      product.shortDescription || '',
+      {
+        allowedTags: [],
+        allowedAttributes: {},
+      }
+    );
+    const sanitizedDescription = sanitizeHtml(product.description || '', {
+      allowedTags: ['b', 'i', 'em', 'strong', 'p', 'ul', 'ol', 'li', 'br'],
       allowedAttributes: {},
     });
-
     return (
       <>
         <NextSeo
           title={`${product.title}`}
-          description={`${product.title} - ${sanitizedDescriptionText}`}
+          description={`${product.title} - ${sanitizedDescription}`}
           openGraph={{
             type: 'website',
             locale: 'en_IE',
@@ -333,7 +339,7 @@ export default function ProductPage({ product }) {
                       Pagrindinė informacija
                     </h3>
                     <p className='text-gray-700 leading-relaxed'>
-                      {product.shortDescription}
+                      {sanitizedShortDescription}
                     </p>
                   </div>
                   {/* Quick Info */}
@@ -367,200 +373,78 @@ export default function ProductPage({ product }) {
               </div>
             </div>
           </div>
-          {/* Content Tabs */}
-          <div className='container mx-auto px-4 py-12'>
-            <Tabs
-              value={activeTab}
-              onValueChange={setActiveTab}
-              className='w-full'
-            >
-              <TabsList className='grid w-full grid-cols-2 lg:w-auto lg:grid-cols-2 mb-8'>
-                <TabsTrigger
-                  value='description'
-                  className='text-base'
-                  isActive={activeTab === 'description'}
-                  onClick={setActiveTab}
-                >
-                  Aprašymas
-                </TabsTrigger>
-                <TabsTrigger
-                  value='moreInfo'
-                  className='text-base'
-                  isActive={activeTab === 'moreInfo'}
-                  onClick={setActiveTab}
-                >
-                  Daugiau informacijos
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent
-                value='description'
-                activeValue={activeTab}
-                className='space-y-8'
-              >
-                {/* Travel Days */}
-                {product.travelDays && (
-                  <Card>
-                    <CardContent className='p-6'>
-                      <h3 className='text-xl font-semibold mb-6 flex items-center gap-2'>
-                        <Calendar className='w-5 h-5 text-green-600' />
-                        Kelionės programa
-                      </h3>
-                      <div className='space-y-4'>
-                        {product.travelDays.map((day, idx) => (
-                          <div
-                            key={idx}
-                            className='border border-gray-200 rounded-lg overflow-hidden hover:border-green-200 transition-colors'
-                          >
-                            <button
-                              onClick={() => toggleDayExpansion(day.day)}
-                              className='w-full p-4 text-left hover:bg-green-50 transition-colors duration-200 flex items-center justify-between'
-                            >
-                              <div>
-                                <h4 className='font-medium text-gray-900'>
-                                  {day.title}
-                                </h4>
-                              </div>
-                              {expandedDay === day.day ? (
-                                <ChevronUp className='w-5 h-5 text-green-500' />
-                              ) : (
-                                <ChevronDown className='w-5 h-5 text-green-500' />
-                              )}
-                            </button>
-                            {expandedDay === day.day && (
-                              <div className='px-4 pb-4 border-t border-gray-100 bg-green-50/50'>
-                                <p className='text-gray-700 mt-3 leading-relaxed'>
-                                  {day.description}
-                                </p>
-                                {/* Future: Add edit form here */}
-                                {/* 
-                                <div className='mt-4 space-y-2'>
-                                  <input 
-                                    type="text" 
-                                    placeholder="Dienos pavadinimas"
-                                    className="w-full p-2 border rounded"
-                                  />
-                                  <textarea 
-                                    placeholder="Dienos aprašymas"
-                                    className="w-full p-2 border rounded h-20"
-                                  />
-                                </div>
-                                */}
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                        {/* Future: Add new day button */}
-                        {/* 
-                        <button className='w-full p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-green-400 hover:text-green-600 transition-colors'>
-                          + Pridėti dieną
-                        </button>
-                        */}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
-                {/* Description */}
-                <Card>
-                  <CardContent className='p-6'>
-                    <h3 className='text-xl font-semibold mb-4'>
-                      Detalus aprašymas
-                    </h3>
+
+          {/* Detalus aprašymas */}
+          <div className='container mx-auto px-4 py-8'>
+            <h2 className='text-2xl font-bold mb-4'>Detalus aprašymas</h2>
+            <div
+              className='prose max-w-none mb-8'
+              dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+            />
+
+            {/* Expandable Days */}
+            {product.travelDays && product.travelDays.length > 0 && (
+              <div className='mb-8'>
+                <h3 className='text-xl font-semibold mb-4'>Kelionės dienos</h3>
+                <div className='space-y-2'>
+                  {product.travelDays.map((day, idx) => (
                     <div
-                      className='description-content text-gray-700 leading-relaxed space-y-4'
-                      dangerouslySetInnerHTML={{ __html: product.description }}
-                      style={{
-                        fontSize: '16px',
-                        lineHeight: '1.7',
-                        color: '#4a5568',
-                      }}
-                    />
-                  </CardContent>
-                </Card>
-                {/* What's Included/Excluded */}
-                <div className='grid md:grid-cols-2 gap-6'>
-                  <Card>
-                    <CardContent className='p-6'>
-                      <h3 className='text-lg font-semibold mb-4 text-green-600 flex items-center gap-2'>
-                        <CheckCircle className='w-5 h-5' />
-                        Kainoje įskaičiuota
-                      </h3>
-                      <ul className='space-y-2'>
-                        {product.included?.map((item, index) => (
-                          <li key={index} className='flex items-start gap-2'>
-                            <CheckCircle className='w-4 h-4 text-green-500 mt-0.5 flex-shrink-0' />
-                            <span className='text-gray-700'>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className='p-6'>
-                      <h3 className='text-lg font-semibold mb-4 text-red-600 flex items-center gap-2'>
-                        <XCircle className='w-5 h-5' />
-                        Kainoje neįskaičiuota
-                      </h3>
-                      <ul className='space-y-2'>
-                        {product.excluded?.map((item, index) => (
-                          <li key={index} className='flex items-start gap-2'>
-                            <XCircle className='w-4 h-4 text-red-500 mt-0.5 flex-shrink-0' />
-                            <span className='text-gray-700'>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-              <TabsContent value='moreInfo' activeValue={activeTab}>
-                <Card>
-                  <CardContent className='p-6'>
-                    <h3 className='text-xl font-semibold mb-6 flex items-center gap-2'>
-                      <Info className='w-5 h-5 text-green-600' />
-                      Papildoma informacija
-                    </h3>
-                    <div className='grid md:grid-cols-2 gap-6'>
-                      <div className='space-y-4'>
-                        <div>
-                          <label className='block text-sm font-medium text-gray-900 mb-1'>
-                            Šalis
-                          </label>
-                          <p className='text-gray-700'>
-                            {product.brand || product.country}
+                      key={idx}
+                      className='border rounded-lg overflow-hidden'
+                    >
+                      <button
+                        onClick={() => toggleDayExpansion(day.day)}
+                        className='w-full flex justify-between items-center px-4 py-3 bg-gray-100 hover:bg-green-50 transition-colors font-medium text-left'
+                      >
+                        <span>{day.title || `${day.day} diena`}</span>
+                        {expandedDay === day.day ? (
+                          <ChevronUp className='w-5 h-5 text-green-500' />
+                        ) : (
+                          <ChevronDown className='w-5 h-5 text-green-500' />
+                        )}
+                      </button>
+                      {expandedDay === day.day && (
+                        <div className='px-4 py-3 bg-green-50 border-t'>
+                          <p className='text-gray-700 whitespace-pre-line'>
+                            {day.description}
                           </p>
                         </div>
-                        <div>
-                          <label className='block text-sm font-medium text-gray-900 mb-1'>
-                            Kelionės tipas
-                          </label>
-                          <p className='text-gray-700'>
-                            {product.gender || product.travelType}
-                          </p>
-                        </div>
-                      </div>
-                      <div className='space-y-4'>
-                        <div>
-                          <label className='block text-sm font-medium text-gray-900 mb-1'>
-                            Lankomi miestai
-                          </label>
-                          <p className='text-gray-700'>
-                            {product.sizes || product.cities}
-                          </p>
-                        </div>
-                        <div>
-                          <label className='block text-sm font-medium text-gray-900 mb-1'>
-                            Kelionės trukmė
-                          </label>
-                          <p className='text-gray-700'>
-                            {product.colors || product.duration}
-                          </p>
-                        </div>
-                      </div>
+                      )}
                     </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Included/Excluded in Price */}
+            <div className='grid md:grid-cols-2 gap-6'>
+              <div className='bg-green-50 rounded-xl p-6 border border-green-100'>
+                <h3 className='text-lg font-semibold mb-4 text-green-600 flex items-center gap-2'>
+                  <CheckCircle className='w-5 h-5' /> Į kainą įskaičiuota
+                </h3>
+                <ul className='space-y-2'>
+                  {product.includedinprice?.map((item, index) => (
+                    <li key={index} className='flex items-start gap-2'>
+                      <CheckCircle className='w-4 h-4 text-green-500 mt-0.5 flex-shrink-0' />
+                      <span className='text-gray-700'>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className='bg-red-50 rounded-xl p-6 border border-red-100'>
+                <h3 className='text-lg font-semibold mb-4 text-red-600 flex items-center gap-2'>
+                  <XCircle className='w-5 h-5' /> Į kainą neįskaičiuota
+                </h3>
+                <ul className='space-y-2'>
+                  {product.excludedinprice?.map((item, index) => (
+                    <li key={index} className='flex items-start gap-2'>
+                      <XCircle className='w-4 h-4 text-red-500 mt-0.5 flex-shrink-0' />
+                      <span className='text-gray-700'>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
           {/* Sticky Bottom CTA */}
           <div className='fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 lg:hidden'>

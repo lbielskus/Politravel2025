@@ -62,7 +62,7 @@ const Layout = ({
         showCategories={showCategories}
         setShowCategories={setShowCategories}
       />
-      <main className='will-change-scroll sm:mt-36'>{children}</main>
+      <main className='will-change-scroll sm:mt-8'>{children}</main>
       <Footer />
       <ContactButton />
       <BackToTopButton />

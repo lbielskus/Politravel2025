@@ -82,7 +82,7 @@ const CookieConsent = () => {
       <div className='fixed inset-0 bg-black/50 backdrop-blur-sm z-50' />
 
       {/* Cookie Consent Modal */}
-      <div className='fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md z-50'>
+      <div className='!fixed bottom-4 left-1/2 transform -translate-x-1/2 w-[95vw] max-w-md md:left-auto md:right-4 md:translate-x-0 md:w-auto md:max-w-md !z-[9999]'>
         <div className='bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden'>
           {/* Header */}
           <div className='bg-gradient-to-r from-button/10 to-primary/10 px-6 py-4 border-b border-gray-100'>
