@@ -4,6 +4,7 @@ import Image from 'next/legacy/image';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { slugify } from '../../utils/slugify';
 
 // Create local slug utility functions to avoid import issues
 const createSlug = (title) => {
@@ -358,8 +359,8 @@ export async function getServerSideProps({ params, req }) {
     if (!productsRes.ok) throw new Error('Failed to fetch products');
     const allProducts = await productsRes.json();
 
-    // Filter products by category id
-    const products = allProducts.filter((p) => p.category === categoryData.id);
+    // Filter products by slugified category name
+    const products = allProducts.filter((p) => slugify(p.category) === slug);
 
     return {
       props: {

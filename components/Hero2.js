@@ -54,16 +54,17 @@ const Hero2 = () => {
               <FaHotjar className='text-button text-3xl  z-10' />
             </div>
             {media.images && media.images.length > 0 && (
-              <Image
-                src={media.images[0] || '/Placeholder.png'}
-                alt={media.name}
-                width={180}
-                height={180}
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-                className='rounded-2xl'
-              />
+              <div className='relative w-[180px] h-[180px]'>
+                <Image
+                  src={media.images[0] || '/Placeholder.png'}
+                  alt={media.name}
+                  fill
+                  className='rounded-2xl'
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
             )}
           </div>
         </div>
