@@ -54,8 +54,7 @@ export default function Home({
       />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <Hero1 mediaData={mediaData} />
-      <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <IconCards />
+
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <BlogSlide posts={blogPosts} />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
