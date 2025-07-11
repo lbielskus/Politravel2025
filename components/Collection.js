@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 const formatPrice = (price) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -52,13 +52,14 @@ export default function Collection({ product }) {
                   <div className='lg:col-span-2 lg:py-8'>
                     <ul className='grid grid-cols-2 gap-4'>
                       <li>
-                        <div className='block group'>
+                        <div className='block group relative w-full aspect-square'>
                           <Image
                             src={product.images[0]}
                             alt=''
-                            layout='fill'
-                            objectFit='cover'
-                            className='rounded'
+                            width={300}
+                            height={300}
+                            style={{ objectFit: 'cover' }}
+                            className='rounded w-full h-full'
                           />
                         </div>
                       </li>
@@ -68,9 +69,10 @@ export default function Collection({ product }) {
                           <Image
                             src={product.images[1]}
                             alt=''
-                            layout='fill'
-                            objectFit='cover'
-                            className='rounded'
+                            width={300}
+                            height={300}
+                            style={{ objectFit: 'cover' }}
+                            className='rounded w-full h-full'
                           />
                         </div>
                       </li>

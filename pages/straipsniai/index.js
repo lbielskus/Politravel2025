@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { NextSeo } from 'next-seo';
 import { createSlug } from '../../utils/slugify';
 import { Calendar, Clock, ArrowRight, User } from 'lucide-react';
@@ -120,8 +120,9 @@ export default function Blog({ posts }) {
                       <Image
                         src={post.images[0]}
                         alt={post.title}
-                        fill
-                        className='object-cover transition-transform duration-500 group-hover:scale-110'
+                        width={400}
+                        height={192}
+                        className='object-cover transition-transform duration-500 group-hover:scale-110 w-full h-48'
                       />
                     ) : (
                       <div className='h-full bg-gradient-to-br from-button/20 to-hover3/20 flex items-center justify-center'>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { createSlug } from '../utils/slugify';
 import { ArrowRight, MapPin, Users, Camera } from 'lucide-react';
 
@@ -37,8 +37,10 @@ const Categories = ({ categories }) => {
                       <Image
                         src={category.images[0]}
                         alt={category.name}
-                        fill
-                        className='object-cover transition-transform duration-500 group-hover:scale-110'
+                        width={400}
+                        height={256}
+                        style={{ objectFit: 'cover' }}
+                        className='transition-transform duration-500 group-hover:scale-110 w-full h-64'
                       />
                     ) : (
                       <div className='h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center'>

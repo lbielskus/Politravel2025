@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
 
 const Hero1big = ({ mediaData }) => {
@@ -30,12 +30,13 @@ const Hero1big = ({ mediaData }) => {
               <Image
                 src={media.images[0]}
                 alt={media.name}
-                layout='fill'
-                objectFit='cover'
+                width={1200}
+                height={350}
+                style={{ objectFit: 'cover' }}
                 onError={(e) => {
                   e.target.style.display = 'none';
                 }}
-                className='w-full h-full'
+                className='w-full h-full object-cover'
               />
               <div
                 className='absolute inset-0 flex flex-col justify-center items-center text-center text-white p-4'

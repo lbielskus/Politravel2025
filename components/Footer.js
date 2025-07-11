@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok } from 'react-icons/fa';
 import { MdArrowForward } from 'react-icons/md';
 
@@ -91,7 +91,6 @@ const Footer = () => {
                 className='h-[90px] w-auto cursor-pointer'
                 width={210}
                 height={105}
-                layout='fixed'
               />
             </Link>
           </div>

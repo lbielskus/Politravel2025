@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { CartContext } from '../lib/CartContext';
 import toast from 'react-hot-toast';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
 import { createSlug } from '../utils/slugify';
-import { FloatingGlassCard } from './Cards';
+import FloatingGlassCard from './Cards/FloatingGlassCard';
 import { ArrowRight, Sparkles, TrendingUp } from 'lucide-react';
 
 const formatPrice = (price) => {

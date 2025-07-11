@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Spinner from '../../components/Spinner';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { createSlug } from '../../utils/slugify';
-import { FloatingGlassCard } from '../../components/Cards';
+import FloatingGlassCard from '../../components/Cards/FloatingGlassCard';
 
 const formatPrice = (price) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');

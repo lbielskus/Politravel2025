@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { NextSeo } from 'next-seo';
 import { findBySlug } from '../../utils/slugify';
 
@@ -72,8 +72,9 @@ export default function BlogPost({ post }) {
                   <Image
                     src={post.image}
                     alt={post.title}
-                    fill
-                    className='object-cover'
+                    width={1200}
+                    height={384}
+                    className='object-cover w-full h-96'
                   />
                 </div>
               )}

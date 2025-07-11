@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
 import { FaHotjar } from 'react-icons/fa';
 
@@ -59,7 +59,6 @@ const Hero2 = () => {
                 alt={media.name}
                 width={180}
                 height={180}
-                layout='fixed'
                 onError={(e) => {
                   e.target.style.display = 'none';
                 }}

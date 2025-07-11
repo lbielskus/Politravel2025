@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { createSlug } from '../utils/slugify';
 import {
   ChevronLeft,
@@ -118,8 +118,10 @@ const SlidingCategories = ({ categories }) => {
                       <Image
                         src={category.images[0]}
                         alt={category.name}
-                        fill
-                        className='object-cover transition-transform duration-700 group-hover:scale-110'
+                        width={500}
+                        height={300}
+                        style={{ objectFit: 'cover' }}
+                        className='transition-transform duration-700 group-hover:scale-110 w-full h-full'
                       />
                     ) : (
                       <div className='w-full h-full bg-gradient-to-br from-primary/20 to-button/20 flex items-center justify-center'>

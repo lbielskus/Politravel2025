@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import sanitizeHtml from 'sanitize-html';
 import { NextSeo } from 'next-seo';
 import {
@@ -187,8 +187,9 @@ export default function ProductPage({ product }) {
                         product.images[currentImageIndex] || '/placeholder.svg'
                       }
                       alt={product.title}
-                      fill
-                      className='object-contain transition-transform duration-300 group-hover:scale-105'
+                      width={800}
+                      height={600}
+                      className='object-contain transition-transform duration-300 group-hover:scale-105 w-full h-full'
                     />
                     {/* Navigation Arrows */}
                     {product.images.length > 1 && (
@@ -258,7 +259,8 @@ export default function ProductPage({ product }) {
                           <Image
                             src={image || '/placeholder.svg'}
                             alt={`${product.title} ${index + 1}`}
-                            fill
+                            width={80}
+                            height={64}
                             className='object-contain'
                           />
                         </button>
@@ -590,13 +592,13 @@ export async function getServerSideProps(context) {
   try {
     // Fetch all products to find by slug
     const res = await fetch(`${baseUrl}/api/products`);
-
-    if (res.ok) {
-      const allProducts = await res.json();
-      product = findBySlug(allProducts, slug);
-    }
+    if (!res.ok) throw new Error('Failed to fetch products');
+    const allProducts = await res.json();
+    product = findBySlug(allProducts, slug);
   } catch (error) {
-    // Error handling for production
+    // Optionally log error for debugging
+    // console.error('SSR error in keliones/[slug]:', error);
+    return { notFound: true };
   }
 
   if (!product) {

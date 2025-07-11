@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
 
 const Hero1small = ({ mediaData }) => {
@@ -31,11 +31,9 @@ const Hero1small = ({ mediaData }) => {
                 <Image
                   src={media.images[0]}
                   alt={media.name}
-                  layout='responsive'
                   width={326}
                   height={164}
-                  objectFit='contain'
-                  objectPosition='right'
+                  style={{ objectFit: 'contain', objectPosition: 'right' }}
                   placeholder='blur'
                   blurDataURL='https://res.cloudinary.com/dtv9ufmel/image/upload/v1713120176/ecommerce-app/file_1713120176508.webp'
                   onError={(e) => {

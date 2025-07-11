@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useContext } from 'react';
 import { CartContext } from '../../lib/CartContext';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 export default function Hero({ product }) {
   const { addProduct } = useContext(CartContext);
@@ -33,7 +33,7 @@ export default function Hero({ product }) {
                         alt=''
                         width={288}
                         height={320}
-                        objectFit='cover'
+                        style={{ objectFit: 'cover' }}
                       />
                     </div>
                     <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform -rotate-2 translate-x-2 hover:rotate-4 hover:translate-x-4 transition-transform duration-300 ease-in-out'>
@@ -42,7 +42,7 @@ export default function Hero({ product }) {
                         alt=''
                         width={288}
                         height={320}
-                        objectFit='cover'
+                        style={{ objectFit: 'cover' }}
                       />
                     </div>
                   </div>
@@ -71,7 +71,7 @@ export default function Hero({ product }) {
                         alt=''
                         width={288}
                         height={320}
-                        objectFit='cover'
+                        style={{ objectFit: 'cover' }}
                       />
                     </div>
                     <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform -rotate-2 translate-x-2 hover:rotate-4 hover:translate-x-4 transition-transform duration-300 ease-in-out'>
@@ -80,7 +80,7 @@ export default function Hero({ product }) {
                         alt=''
                         width={288}
                         height={320}
-                        objectFit='cover'
+                        style={{ objectFit: 'cover' }}
                       />
                     </div>
                   </div>
@@ -91,7 +91,7 @@ export default function Hero({ product }) {
                         alt=''
                         width={288}
                         height={320}
-                        objectFit='cover'
+                        style={{ objectFit: 'cover' }}
                       />
                     </div>
                     <div className='w-72 h-80 overflow-hidden rounded-lg border border-secondary transform -rotate-4 translate-x-2 hover:rotate-8 hover:translate-x-3 transition-transform duration-300 ease-in-out'>
@@ -100,7 +100,7 @@ export default function Hero({ product }) {
                         alt=''
                         width={288}
                         height={320}
-                        objectFit='cover'
+                        style={{ objectFit: 'cover' }}
                       />
                     </div>
                   </div>

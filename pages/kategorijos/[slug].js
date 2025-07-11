@@ -1,10 +1,56 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
-import { createSlug, findBySlug } from '../../utils/slugify';
-import { FloatingGlassCard } from '../../components/Cards';
+import dynamic from 'next/dynamic';
+
+// Create local slug utility functions to avoid import issues
+const createSlug = (title) => {
+  if (!title) return '';
+  return title
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/ą/g, 'a')
+    .replace(/č/g, 'c')
+    .replace(/ę/g, 'e')
+    .replace(/ė/g, 'e')
+    .replace(/į/g, 'i')
+    .replace(/š/g, 's')
+    .replace(/ų/g, 'u')
+    .replace(/ū/g, 'u')
+    .replace(/ž/g, 'z')
+    .replace(/ä|à|á|â|ã|å/g, 'a')
+    .replace(/ö|ò|ó|ô|õ|ø/g, 'o')
+    .replace(/ü|ù|ú|û/g, 'u')
+    .replace(/ë|è|é|ê/g, 'e')
+    .replace(/ï|ì|í|î/g, 'i')
+    .replace(/ÿ|ý/g, 'y')
+    .replace(/ñ/g, 'n')
+    .replace(/ç/g, 'c')
+    .replace(/ß/g, 'ss')
+    .replace(/[^\w\s-]/g, ' ')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
+const findBySlug = (items, slug) => {
+  if (!items || !slug) return null;
+  return (
+    items.find((item) => {
+      const itemSlug = createSlug(item.title || item.name);
+      return itemSlug === slug;
+    }) || null
+  );
+};
+
+const FloatingGlassCard = dynamic(
+  () => import('../../components/Cards/FloatingGlassCard'),
+  {
+    ssr: true,
+  }
+);
 
 export default function CategorySlugPage({ products, categoryName }) {
   const router = useRouter();
@@ -281,28 +327,35 @@ export async function getServerSideProps({ params, req }) {
 
   const { slug } = params;
 
-  // Fetch all categories
-  const categoriesRes = await fetch(`${baseUrl}/api/categories`);
-  const categories = await categoriesRes.json();
+  try {
+    // Fetch all categories
+    const categoriesRes = await fetch(`${baseUrl}/api/categories`);
+    if (!categoriesRes.ok) throw new Error('Failed to fetch categories');
+    const categories = await categoriesRes.json();
 
-  // Find the category by slug
-  const categoryData = findBySlug(categories, slug);
+    // Find the category by slug
+    const categoryData = findBySlug(categories, slug);
+    if (!categoryData) {
+      return { notFound: true };
+    }
 
-  if (!categoryData) {
+    // Fetch all products
+    const productsRes = await fetch(`${baseUrl}/api/products`);
+    if (!productsRes.ok) throw new Error('Failed to fetch products');
+    const allProducts = await productsRes.json();
+
+    // Filter products by category id
+    const products = allProducts.filter((p) => p.category === categoryData.id);
+
+    return {
+      props: {
+        products,
+        categoryName: categoryData.name,
+      },
+    };
+  } catch (error) {
+    // Optionally log error for debugging
+    // console.error('SSR error in kategorijos/[slug]:', error);
     return { notFound: true };
   }
-
-  // Fetch all products
-  const productsRes = await fetch(`${baseUrl}/api/products`);
-  const allProducts = await productsRes.json();
-
-  // Filter products by category id
-  const products = allProducts.filter((p) => p.category === categoryData.id);
-
-  return {
-    props: {
-      products,
-      categoryName: categoryData.name,
-    },
-  };
 }

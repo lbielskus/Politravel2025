@@ -3,7 +3,7 @@
  * @param {string} text - The text to convert to a slug
  * @returns {string} - URL-friendly slug
  */
-export function slugify(text) {
+const slugify = (text) => {
   if (!text) return '';
 
   return (
@@ -21,23 +21,33 @@ export function slugify(text) {
       .replace(/ų/g, 'u')
       .replace(/ū/g, 'u')
       .replace(/ž/g, 'z')
+      // Replace common European characters
+      .replace(/ä|à|á|â|ã|å/g, 'a')
+      .replace(/ö|ò|ó|ô|õ|ø/g, 'o')
+      .replace(/ü|ù|ú|û/g, 'u')
+      .replace(/ë|è|é|ê/g, 'e')
+      .replace(/ï|ì|í|î/g, 'i')
+      .replace(/ÿ|ý/g, 'y')
+      .replace(/ñ/g, 'n')
+      .replace(/ç/g, 'c')
+      .replace(/ß/g, 'ss')
       // Replace special characters with spaces
-      .replace(/[^\w\s-]/g, '')
+      .replace(/[^\w\s-]/g, ' ')
       // Replace multiple spaces or hyphens with single hyphen
       .replace(/[\s_-]+/g, '-')
       // Remove leading/trailing hyphens
       .replace(/^-+|-+$/g, '')
   );
-}
+};
 
 /**
  * Create a slug from title only
  * @param {string} title - The product/article title
  * @returns {string} - Clean title-based slug
  */
-export function createSlug(title) {
+const createSlug = (title) => {
   return slugify(title);
-}
+};
 
 /**
  * Find product/article by slug (title matching)
@@ -45,7 +55,7 @@ export function createSlug(title) {
  * @param {string} slug - The slug to match against
  * @returns {Object|null} - The matching item or null if not found
  */
-export function findBySlug(items, slug) {
+const findBySlug = (items, slug) => {
   if (!items || !slug) return null;
 
   return (
@@ -54,4 +64,6 @@ export function findBySlug(items, slug) {
       return itemSlug === slug;
     }) || null
   );
-}
+};
+
+export { slugify, createSlug, findBySlug };

@@ -25,16 +25,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const [showCategories, setShowCategories] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
 
-  let showNavbar = true;
-
-  if (
-    pathname === '/login' ||
-    pathname === '/signup' ||
-    pathname === '/forgot-password'
-  ) {
-    showNavbar = false;
-  }
-
   useEffect(() => {
     const handleRouteChange = () => {
       setShowCategories(false);

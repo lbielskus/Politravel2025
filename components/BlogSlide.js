@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import {
   Calendar,
   Clock,
@@ -85,8 +85,9 @@ const BlogSlide = ({ posts }) => {
                   <Image
                     src={currentPost.image}
                     alt={currentPost.title}
-                    fill
-                    className='object-cover'
+                    width={600}
+                    height={400}
+                    className='object-cover w-full h-full'
                   />
                 ) : (
                   <div className='w-full h-full bg-gradient-to-br from-button/20 to-primary/20 flex items-center justify-center'>

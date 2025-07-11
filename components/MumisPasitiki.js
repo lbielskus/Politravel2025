@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 
 const MumisPasitiki = () => {
@@ -21,7 +21,6 @@ const MumisPasitiki = () => {
               width={300}
               height={150}
               className='h-18 opacity-100'
-              layout='fixed'
             />
           </div>
         </div>

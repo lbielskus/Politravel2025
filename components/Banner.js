@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 const Banner = ({ imageUrl, title }) => {
   return (
@@ -12,13 +12,13 @@ const Banner = ({ imageUrl, title }) => {
           <Image
             src={imageUrl}
             alt={title}
-            layout='fill'
-            objectFit='cover'
-            objectPosition='center'
+            width={1200}
+            height={288}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
             onError={(e) => {
               e.target.style.display = 'none';
             }}
-            className='rounded-2xl'
+            className='rounded-2xl w-full h-full'
           />
         </div>
       ) : (

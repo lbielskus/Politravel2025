@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import {
   Clock,
   Star,
@@ -66,8 +66,9 @@ const FloatingGlassCard = ({
             <Image
               src={product.images?.[0] || '/placeholder.svg'}
               alt={product.title}
-              fill
-              className='object-cover transition-transform duration-500 group-hover:scale-105'
+              width={400}
+              height={300}
+              className='object-cover transition-transform duration-500 group-hover:scale-105 w-full h-full'
             />
             <div className='absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent' />
 
