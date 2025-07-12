@@ -9,6 +9,11 @@ import { useState, useEffect } from 'react';
 import { db } from '../lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import Layout from '../components/Layout';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  usePageTransition,
+  pageTransitionVariants,
+} from '../hooks/usePageTransition';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -24,6 +29,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = router;
   const [showCategories, setShowCategories] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
+  const { isLoading } = usePageTransition();
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -109,7 +115,18 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           setShowCategories={setShowCategories}
           className={montserrat.className}
         >
-          <Component {...pageProps} />
+          <AnimatePresence mode='wait'>
+            <motion.div
+              key={router.asPath}
+              initial='initial'
+              animate='in'
+              exit='out'
+              variants={pageTransitionVariants}
+              transition={{ duration: 0.3 }}
+            >
+              <Component {...pageProps} />
+            </motion.div>
+          </AnimatePresence>
         </Layout>
       </CartContextProvider>
     </>

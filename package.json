@@ -12,6 +12,8 @@
     "postbuild": "next-sitemap",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "generate-sitemap:prod": "NODE_ENV=production node scripts/generate-sitemap.js",
+    "verify-sitemap": "node scripts/verify-sitemap.js",
+    "sitemap-status": "node scripts/check-sitemap-status.js",
     "lighthouse": "lighthouse http://localhost:3000 --output html --output-path ./lighthouse-report.html"
   },
   "dependencies": {
@@ -26,6 +28,7 @@
     "draftjs-to-html": "^0.9.1",
     "firebase": "^11.10.0",
     "formidable": "^3.5.1",
+    "framer-motion": "^12.23.3",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.525.0",

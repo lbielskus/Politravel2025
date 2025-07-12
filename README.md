@@ -1,5 +1,15 @@
 # PoliTravel Frontend 🌍
 
+git add .
+git commit -m "commit"
+git push origin main
+
+https://politravel.lt/sitemap-0.xml
+https://politravel.lt/api/sitemap-dynamic
+https://politravel.lt/api/sitemap-index
+
+https://politravel.lt/sitemap.xml
+
 A modern, high-performance travel website built with Next.js, featuring a professional dark green and yellow-orange theme, comprehensive travel products showcase, and production-ready optimizations.
 
 **Project developed by LB Websites © 2024. All rights reserved.**

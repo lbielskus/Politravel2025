@@ -8,6 +8,7 @@ import ContactButton from './ContactButton';
 import BackToTopButton from './BackToTopButton';
 import TopBanner from './TopBanner';
 import Top2Banner from './Top2Banner';
+import FloatingActionButton from './FloatingActionButton';
 
 type LayoutProps = {
   children: ReactNode;
@@ -67,6 +68,7 @@ const Layout = ({
       {/* Fixed buttons placed outside the main container for proper viewport positioning */}
       <ContactButton />
       <BackToTopButton />
+      <FloatingActionButton />
       <CookieConsent />
     </>
   );

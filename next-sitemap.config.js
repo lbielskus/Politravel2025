@@ -16,17 +16,27 @@ const config = {
       'https://politravel.lt/sitemap.xml',
       'https://politravel.lt/sitemap-0.xml',
       'https://politravel.lt/api/sitemap-dynamic',
+      'https://politravel.lt/api/sitemap-index',
     ],
   },
   // Transform function to add dynamic routes
   transform: async (config, path) => {
-    // Add dynamic routes based on the path
-    if (path === '/keliones') {
-      // This will be handled by the additionalPaths function
+    // Homepage - highest priority
+    if (path === '/') {
       return {
         loc: path,
         changefreq: 'daily',
-        priority: 0.8,
+        priority: 1.0,
+        lastmod: new Date().toISOString(),
+      };
+    }
+
+    // Main category pages
+    if (path === '/keliones') {
+      return {
+        loc: path,
+        changefreq: 'daily',
+        priority: 0.9,
         lastmod: new Date().toISOString(),
       };
     }
@@ -35,7 +45,7 @@ const config = {
       return {
         loc: path,
         changefreq: 'weekly',
-        priority: 0.7,
+        priority: 0.8,
         lastmod: new Date().toISOString(),
       };
     }
@@ -44,15 +54,54 @@ const config = {
       return {
         loc: path,
         changefreq: 'weekly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      };
+    }
+
+    // Contact and partner pages
+    if (path === '/kontaktai') {
+      return {
+        loc: path,
+        changefreq: 'monthly',
         priority: 0.6,
         lastmod: new Date().toISOString(),
       };
     }
 
+    if (path === '/partneriams') {
+      return {
+        loc: path,
+        changefreq: 'monthly',
+        priority: 0.6,
+        lastmod: new Date().toISOString(),
+      };
+    }
+
+    // Sub pages
+    if (path === '/sub/apie-mus') {
+      return {
+        loc: path,
+        changefreq: 'monthly',
+        priority: 0.5,
+        lastmod: new Date().toISOString(),
+      };
+    }
+
+    if (path === '/sub/duk') {
+      return {
+        loc: path,
+        changefreq: 'monthly',
+        priority: 0.5,
+        lastmod: new Date().toISOString(),
+      };
+    }
+
+    // Default for other pages
     return {
       loc: path,
-      changefreq: 'daily',
-      priority: 0.7,
+      changefreq: 'weekly',
+      priority: 0.6,
       lastmod: new Date().toISOString(),
     };
   },

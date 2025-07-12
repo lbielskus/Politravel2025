@@ -11,6 +11,13 @@ import dynamic from 'next/dynamic';
 import { db } from '../lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import Head from 'next/head';
+import {
+  AnimatedSection,
+  AnimatedHero,
+  AnimatedBanner,
+} from '../components/AnimatedWrapper';
+import PageLoader from '../components/PageLoader';
+import { useState, useEffect } from 'react';
 
 const Hero1 = dynamic(() => import('../components/Hero1'), { ssr: false });
 const BlogSlide = dynamic(() => import('../components/BlogSlide'), {
@@ -25,6 +32,16 @@ export default function Home({
   categories,
   mediaData,
 }) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
   const imageUrl =
     'https://res.cloudinary.com/dgsidhhur/image/upload/v1719743756/ecommerce-app/sqltzz8bfsdtzjkjhyie.png';
 
@@ -62,6 +79,8 @@ export default function Home({
 
   return (
     <>
+      {isLoading && <PageLoader onComplete={() => setIsLoading(false)} />}
+
       <Head>
         <script
           type='application/ld+json'
@@ -120,28 +139,50 @@ export default function Home({
           },
         ]}
       />
-      <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <Hero1
-        image={topBannerImage}
-        title={topBannerTitle}
-        description={topBannerDescription}
-        buttonText={topBannerButton}
-        buttonLink={topBannerButtonLink}
-      />
-      <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <Products products={newProducts} />
-      <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <BlogSlide posts={blogPosts} />
-      <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <SlidingCategories categories={categories} />
-      <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <div className='rounded-xl overflow-hidden'>
-        <Banner imageUrl={topBannerImage} title='' small={true} />
-      </div>
-      <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <IconCards />
-      <hr className='my-5 h-px border-0 bg-gray-300 ' />
-      <MumisPasitiki />
+
+      <AnimatedHero>
+        <hr className='my-5 h-px border-0 bg-gray-300 ' />
+        <Hero1
+          image={topBannerImage}
+          title={topBannerTitle}
+          description={topBannerDescription}
+          buttonText={topBannerButton}
+          buttonLink={topBannerButtonLink}
+        />
+      </AnimatedHero>
+
+      <AnimatedSection>
+        <hr className='my-5 h-px border-0 bg-gray-300 ' />
+        <Products products={newProducts} />
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <hr className='my-5 h-px border-0 bg-gray-300 ' />
+        <BlogSlide posts={blogPosts} />
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <hr className='my-5 h-px border-0 bg-gray-300 ' />
+        <SlidingCategories categories={categories} />
+      </AnimatedSection>
+
+      <AnimatedBanner>
+        <hr className='my-5 h-px border-0 bg-gray-300 ' />
+        <div className='rounded-xl overflow-hidden'>
+          <Banner imageUrl={topBannerImage} title='' small={true} />
+        </div>
+      </AnimatedBanner>
+
+      <AnimatedSection>
+        <hr className='my-5 h-px border-0 bg-gray-300 ' />
+        <IconCards />
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <hr className='my-5 h-px border-0 bg-gray-300 ' />
+        <MumisPasitiki />
+      </AnimatedSection>
+
       {/* <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <ContactForm /> */}
     </>

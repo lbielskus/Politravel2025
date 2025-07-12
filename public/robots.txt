@@ -11,3 +11,4 @@ Host: https://politravel.lt
 Sitemap: https://politravel.lt/sitemap.xml
 Sitemap: https://politravel.lt/sitemap-0.xml
 Sitemap: https://politravel.lt/api/sitemap-dynamic
+Sitemap: https://politravel.lt/api/sitemap-index
