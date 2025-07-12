@@ -176,7 +176,7 @@ export default function Products({ allProducts = [] }) {
             <Spinner />
           </div>
         ) : (
-          <div className='mt-14 md:mt-6 w-full px-4 md:p-0 ml-4 mr-4'>
+          <div className='mt-14 md:mt-6 w-full px-2 md:px-0'>
             <input
               type='text'
               placeholder='Paieška'
@@ -268,7 +268,7 @@ export default function Products({ allProducts = [] }) {
                 </div>
 
                 {/* Cards Grid */}
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-8 items-stretch'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 py-8 items-stretch'>
                   {currentProducts.map((product, index) =>
                     renderCard(product, index)
                   )}

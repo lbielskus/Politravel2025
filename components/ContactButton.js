@@ -13,7 +13,7 @@ const ContactButton = () => {
   };
 
   return (
-    <div className='fixed bottom-4 right-4'>
+    <div className='fixed bottom-4 right-4 z-[9998]'>
       <div
         className='relative inline-block'
         onMouseEnter={() => setIsHovered(true)}
@@ -25,10 +25,10 @@ const ContactButton = () => {
           </span>
         )}
         <button
-          className={`bg-green-600 hover:bg-green-500 border border-white text-white flex items-center justify-center w-16 h-16 rounded-full shadow-md  ${styles['button-mobile']}`}
+          className={`bg-button hover:bg-button/70 border border-white text-white flex items-center justify-center w-14 h-14 rounded-full shadow-md  ${styles['button-mobile']}`}
           onClick={handleClick}
         >
-          <FiPhone size={32} />
+          <FiPhone size={26} />
         </button>
       </div>
     </div>

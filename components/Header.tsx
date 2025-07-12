@@ -59,10 +59,15 @@ export default function Header({
     return (
       <div
         className={`absolute left-0 top-full mt-2 z-50 ${
-          isMobile ? 'w-screen' : 'w-80'
+          isMobile ? 'w-[90vw] max-w-sm' : 'w-96'
         }`}
+        style={{ overflowX: isMobile ? 'hidden' : undefined }}
       >
-        <div className='bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden'>
+        <div
+          className={`bg-white shadow-2xl border border-gray-200 overflow-hidden w-full max-w-full px-2 sm:px-0 ${
+            isMobile ? 'rounded-t-2xl rounded-b-none' : 'rounded-2xl'
+          }`}
+        >
           {/* Header */}
           <div className='bg-gradient-to-r from-button/10 to-primary/10 px-4 py-3 border-b border-gray-100'>
             <h3 className='font-semibold text-gray-800 text-sm'>
@@ -71,41 +76,45 @@ export default function Header({
           </div>
 
           {/* Categories Grid */}
-          <div className='p-4'>
-            <div
-              className={`grid gap-2 ${
-                isMobile ? 'grid-cols-1' : 'grid-cols-2'
-              }`}
-            >
-              {filteredCategories.map((category) => (
-                <Link
-                  key={category.id}
-                  href={
-                    category.id === SPECIAL_CATEGORY_ID
-                      ? '/keliones'
-                      : `/kategorijos/${createSlug(category.name)}`
-                  }
-                  onClick={() => setShowCategories(false)}
-                >
-                  <div className='group flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-button/10 hover:to-primary/10 transition-all duration-300 border border-transparent hover:border-button/20'>
-                    <div className='text-2xl'>
-                      {getCategoryIcon(category.name)}
-                    </div>
-                    <div className='flex-1 min-w-0'>
-                      <h4 className='font-medium text-gray-800 group-hover:text-button transition-colors text-sm truncate'>
-                        {category.name}
-                      </h4>
+          <div
+            className={`grid gap-2 ${
+              isMobile ? 'grid-cols-1' : 'grid-cols-2'
+            } w-full max-w-full`}
+          >
+            {filteredCategories.map((category) => (
+              <Link
+                key={category.id}
+                href={
+                  category.id === SPECIAL_CATEGORY_ID
+                    ? '/keliones'
+                    : `/kategorijos/${createSlug(category.name)}`
+                }
+                onClick={() => setShowCategories(false)}
+              >
+                <div className='group flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-button/10 hover:to-primary/10 transition-all duration-300 border border-transparent hover:border-button/20'>
+                  <div className='text-2xl'>
+                    {getCategoryIcon(category.name)}
+                  </div>
+                  <div className='flex-1 min-w-0'>
+                    <h4
+                      className='font-medium text-gray-800 group-hover:text-button transition-colors text-sm truncate'
+                      title={category.name}
+                    >
+                      {category.name}
+                    </h4>
+                    {/* Only show description on mobile */}
+                    {isMobile && (
                       <p className='text-xs text-gray-500 truncate'>
                         {category.id === SPECIAL_CATEGORY_ID
                           ? 'Visos kelionės'
                           : 'Peržiūrėti pasiūlymus'}
                       </p>
-                    </div>
-                    <ChevronDown className='w-4 h-4 text-gray-400 group-hover:text-button transition-all transform group-hover:translate-x-1 rotate-[-90deg]' />
+                    )}
                   </div>
-                </Link>
-              ))}
-            </div>
+                  <ChevronDown className='w-4 h-4 text-gray-400 group-hover:text-button transition-all transform group-hover:translate-x-1 rotate-[-90deg]' />
+                </div>
+              </Link>
+            ))}
           </div>
 
           {/* Footer */}

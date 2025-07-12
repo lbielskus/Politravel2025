@@ -21,7 +21,7 @@ A modern, high-performance travel website built with Next.js, featuring a profes
 - **Core Web Vitals**: LCP, FID, and CLS optimizations
 - **Production Ready**: All console logs removed, optimized builds
 
-### 🌟 Key Features Implemented
+### 🌟 Key Features Implementedaa
 
 ✅ **Modern UI/UX Design** - Professional travel website theme
 ✅ **Performance Optimizations** - Fast loading and smooth scrolling

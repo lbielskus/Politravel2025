@@ -13,16 +13,20 @@ const Categories = ({ categories }) => {
   };
 
   return (
-    <section className='min-h-screen bg-background'>
-      <div className='container mx-auto px-4 py-16'>
-        <div className='text-center mb-12'>
-          <h1 className='text-4xl font-bold text-text mb-4'>Kategorijos</h1>
-          <p className='text-lg text-gray-600 max-w-2xl mx-auto'>
+    <section
+      className='min-h-screen bg-background'
+      style={{ overflowX: 'hidden' }}
+    >
+      <div className='container mx-auto px-2 sm:px-4 py-10 sm:py-16'>
+        <div className='text-center mb-8 sm:mb-12'>
+          <h1 className='text-3xl sm:text-4xl font-bold text-text mb-2 sm:mb-4'>
+            Kategorijos
+          </h1>
+          <p className='text-base sm:text-lg text-gray-600 max-w-2xl mx-auto'>
             Atraskite savo tobulą kelionę pagal pageidaujamą kelionės tipą
           </p>
         </div>
-
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 w-full max-w-full'>
           {categories.map((category, index) => {
             const IconComponent = getCategoryIcon(category.name);
             return (
@@ -30,7 +34,7 @@ const Categories = ({ categories }) => {
                 key={`${category._id || category.id}-${index}`}
                 href={`/kategorijos/${createSlug(category.name)}`}
               >
-                <div className='group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden h-full flex flex-col'>
+                <div className='group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden h-full flex flex-col w-full max-w-full'>
                   {/* Image */}
                   <div className='relative aspect-[4/3] w-full overflow-hidden'>
                     {category.images && category.images.length > 0 ? (
@@ -55,19 +59,19 @@ const Categories = ({ categories }) => {
                   </div>
 
                   {/* Content */}
-                  <div className='p-6 flex-grow flex flex-col'>
-                    <h3 className='text-xl font-bold text-text mb-3 group-hover:text-button transition-colors duration-300'>
+                  <div className='p-4 sm:p-6 flex-grow flex flex-col'>
+                    <h3 className='text-lg sm:text-xl font-bold text-text mb-2 sm:mb-3 group-hover:text-button transition-colors duration-300'>
                       {category.name}
                     </h3>
 
-                    <p className='text-gray-600 mb-6 line-clamp-3 flex-grow'>
+                    <p className='text-gray-600 mb-4 sm:mb-6 line-clamp-3 flex-grow'>
                       {category.description ||
                         'Atraskite nuostabiausias kelionės galimybes šioje kategorijoje.'}
                     </p>
 
                     {/* Button */}
                     <div className='flex items-center justify-between mt-auto'>
-                      <span className='text-sm text-gray-500'>
+                      <span className='text-xs sm:text-sm text-gray-500'>
                         Sužinokite daugiau
                       </span>
                       <div className='bg-button hover:bg-hover3 text-white rounded-full p-2 transition-all duration-300 group-hover:translate-x-1'>

@@ -29,47 +29,47 @@ const Layout = ({
 
   return (
     <>
-    <div
-      className={`gpu-accelerate min-h-screen max-w-screen-2xl mx-auto bg-background sm:px-6 ${className}`}
-    >
-      <Head>
-        <title>Your Website Title</title>
-        <meta name='description' content='Your website description' />
-        <link rel='icon' href='/favicon.ico' />
+      <div
+        className={`gpu-accelerate min-h-screen max-w-screen-2xl mx-auto bg-background sm:px-6 ${className}`}
+      >
+        <Head>
+          <title>Your Website Title</title>
+          <meta name='description' content='Your website description' />
+          <link rel='icon' href='/favicon.ico' />
 
-        {/* Preload critical resources */}
-        <link
-          rel='preload'
-          href='/fonts/montserrat.woff2'
-          as='font'
-          type='font/woff2'
-          crossOrigin=''
+          {/* Preload critical resources */}
+          <link
+            rel='preload'
+            href='/fonts/montserrat.woff2'
+            as='font'
+            type='font/woff2'
+            crossOrigin=''
+          />
+
+          {/* DNS prefetch for external domains */}
+          <link rel='dns-prefetch' href='//res.cloudinary.com' />
+          <link rel='dns-prefetch' href='//firebasestorage.googleapis.com' />
+
+          {/* Viewport optimization for mobile */}
+          <meta
+            name='viewport'
+            content='width=device-width, initial-scale=1, viewport-fit=cover'
+          />
+        </Head>
+        <Top2Banner />
+        <TopBanner />
+        <Header
+          categories={categories}
+          showCategories={showCategories}
+          setShowCategories={setShowCategories}
         />
-
-        {/* DNS prefetch for external domains */}
-        <link rel='dns-prefetch' href='//res.cloudinary.com' />
-        <link rel='dns-prefetch' href='//firebasestorage.googleapis.com' />
-
-        {/* Viewport optimization for mobile */}
-        <meta
-          name='viewport'
-          content='width=device-width, initial-scale=1, viewport-fit=cover'
-        />
-      </Head>
-      <Top2Banner />
-      <TopBanner />
-      <Header
-        categories={categories}
-        showCategories={showCategories}
-        setShowCategories={setShowCategories}
-      />
-      <main className='will-change-scroll sm:mt-8'>{children}</main>
-      <Footer />
+        <main className='will-change-scroll sm:mt-8'>{children}</main>
+        <Footer />
+      </div>
+      {/* Fixed buttons placed outside the main container for proper viewport positioning */}
       <ContactButton />
       <BackToTopButton />
-      {/* CookieConsent moved outside */}
-    </div>
-    <CookieConsent />
+      <CookieConsent />
     </>
   );
 };

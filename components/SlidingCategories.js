@@ -81,37 +81,38 @@ const SlidingCategories = ({ categories }) => {
   if (!filteredCategories.length) return null;
 
   return (
-    <section className='py-16 lg:py-20 relative overflow-hidden'>
+    <section
+      className='py-10 sm:py-16 lg:py-20 relative overflow-hidden'
+      style={{ overflowX: 'hidden' }}
+    >
       {/* Background Pattern */}
       <div className='absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-button/5'></div>
-
-      <div className='container mx-auto px-4 relative'>
+      <div className='container mx-auto px-2 sm:px-4 relative'>
         {/* Section Header */}
-        <div className='text-center mb-12'>
+        <div className='text-center mb-8 sm:mb-12'>
           <div className='inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-button/10 px-4 py-2 rounded-full mb-4'>
             <Map className='w-4 h-4 text-primary' />
             <span className='text-sm font-medium text-primary'>
               Kelionių tipai
             </span>
           </div>
-          <h2 className='text-3xl lg:text-4xl font-bold text-gray-800 mb-4'>
+          <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-2 sm:mb-4'>
             Kategorijos
           </h2>
-          <p className='text-gray-600 max-w-2xl mx-auto text-lg'>
+          <p className='text-gray-600 max-w-2xl mx-auto text-base sm:text-lg'>
             Raskite savo idealų kelionės tipą ir pradėkite savo nuotykį šiandien
           </p>
         </div>
-
         {/* Categories Grid */}
-        <div className='relative max-w-7xl mx-auto'>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        <div className='relative max-w-7xl mx-auto w-full max-w-full'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 w-full max-w-full'>
             {visibleCategories.map((category, index) => (
               <div
                 key={`${category._id}-${index}`}
-                className='group relative transform transition-all duration-500 hover:scale-[1.02]'
+                className='group relative transform transition-all duration-500 hover:scale-[1.02] w-full max-w-full'
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className='relative h-80 lg:h-96 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500'>
+                <div className='relative h-64 sm:h-80 lg:h-96 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 w-full max-w-full'>
                   {/* Category Image */}
                   <div className='absolute inset-0'>
                     {category.images && category.images.length > 0 ? (
@@ -128,38 +129,34 @@ const SlidingCategories = ({ categories }) => {
                       </div>
                     )}
                   </div>
-
                   {/* Overlay Gradient */}
                   <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-all duration-500'></div>
-
                   {/* Content */}
-                  <div className='absolute bottom-0 left-0 right-0 p-6 text-white'>
+                  <div className='absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white'>
                     <div className='transform translate-y-2 group-hover:translate-y-0 transition-all duration-500'>
-                      <h3 className='text-xl lg:text-2xl font-bold mb-2 group-hover:text-primary transition-colors duration-300'>
+                      <h3 className='text-lg sm:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 group-hover:text-primary transition-colors duration-300'>
                         {category.name}
                       </h3>
-                      <p className='text-white/90 text-sm lg:text-base mb-4 line-clamp-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100'>
+                      <p className='text-white/90 text-xs sm:text-sm lg:text-base mb-2 sm:mb-4 line-clamp-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100'>
                         {category.description}
                       </p>
                       <Link
                         href={`/kategorijos/${createSlug(category.name)}`}
-                        className='inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-xl font-semibold transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 delay-200'
+                        className='inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl font-semibold transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 delay-200 text-xs sm:text-base'
                       >
                         Žiūrėti
                         <ArrowRight className='w-4 h-4' />
                       </Link>
                     </div>
                   </div>
-
                   {/* Floating Number Badge */}
-                  <div className='absolute top-4 right-4 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-sm font-bold text-gray-800 shadow-lg'>
+                  <div className='absolute top-2 sm:top-4 right-2 sm:right-4 w-7 sm:w-8 h-7 sm:h-8 bg-white/90 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold text-gray-800 shadow-lg'>
                     {index + 1}
                   </div>
                 </div>
               </div>
             ))}
           </div>
-
           {/* Navigation Controls */}
           {filteredCategories.length > 1 && (
             <div className='flex items-center justify-center mt-8 gap-4'>
