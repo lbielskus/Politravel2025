@@ -1,9 +1,13 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /api/*
+Disallow: /admin/*
 
 # Host
 Host: https://politravel.lt
 
 # Sitemaps
 Sitemap: https://politravel.lt/sitemap.xml
+Sitemap: https://politravel.lt/sitemap-0.xml
+Sitemap: https://politravel.lt/api/sitemap-dynamic

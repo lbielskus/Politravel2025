@@ -157,26 +157,86 @@ export default function ProductPage({ product }) {
     return (
       <>
         <NextSeo
-          title={`${product.title}`}
-          description={`${product.title} - ${sanitizedDescription}`}
+          title={`${product.title} - PoliTravel.lt`}
+          description={`${
+            product.title
+          } - ${sanitizedShortDescription}. Atraskite šią nuostabią kelionę su PoliTravel.lt. Kaina: €${formatPrice(
+            product.price
+          )}/asmeniui.`}
+          canonical={`https://politravel.lt/keliones/${router.query.slug}`}
           openGraph={{
             type: 'website',
-            locale: 'en_IE',
-            url: 'https://politravel.lt/',
-            site_name: 'PoliTravel',
+            locale: 'lt_LT',
+            url: `https://politravel.lt/keliones/${router.query.slug}`,
+            site_name: 'PoliTravel.lt',
+            title: `${product.title} - PoliTravel.lt`,
+            description: `${product.title} - ${sanitizedShortDescription}. Atraskite šią nuostabią kelionę su PoliTravel.lt.`,
             images: [
               {
-                url: product.images[currentImageIndex],
+                url:
+                  product.images[currentImageIndex] ||
+                  'https://res.cloudinary.com/dgsidhhur/image/upload/v1719670070/ecommerce-app/zx6rrkftwt5agzysa7tg.png',
                 width: 1200,
                 height: 630,
-                alt: 'Product image',
+                alt: `${product.title} - PoliTravel.lt`,
+                type: 'image/jpeg',
               },
             ],
           }}
           twitter={{
-            handle: '@handle',
-            site: '@site',
+            handle: '@politravel',
+            site: '@politravel',
             cardType: 'summary_large_image',
+          }}
+          additionalMetaTags={[
+            {
+              name: 'keywords',
+              content: `${
+                product.title
+              }, kelionės, kelionių agentūra, PoliTravel, ${
+                product.brand || product.country || ''
+              }`,
+            },
+            {
+              name: 'robots',
+              content:
+                'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+            },
+          ]}
+        />
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'TouristTrip',
+              name: product.title,
+              description: sanitizedShortDescription,
+              url: `https://politravel.lt/keliones/${router.query.slug}`,
+              image:
+                product.images[currentImageIndex] ||
+                'https://res.cloudinary.com/dgsidhhur/image/upload/v1719670070/ecommerce-app/zx6rrkftwt5agzysa7tg.png',
+              offers: {
+                '@type': 'Offer',
+                price: product.price,
+                priceCurrency: 'EUR',
+                availability: 'https://schema.org/InStock',
+                seller: {
+                  '@type': 'TravelAgency',
+                  name: 'PoliTravel.lt',
+                  url: 'https://politravel.lt',
+                },
+              },
+              provider: {
+                '@type': 'TravelAgency',
+                name: 'PoliTravel.lt',
+                url: 'https://politravel.lt',
+              },
+              ...(product.duration && { duration: product.duration }),
+              ...(product.brand && {
+                location: { '@type': 'Place', name: product.brand },
+              }),
+            }),
           }}
         />
         <div className='min-h-screen bg-gray-50'>
@@ -449,19 +509,6 @@ export default function ProductPage({ product }) {
                     </li>
                   ))}
                 </ul>
-              </div>
-            </div>
-          </div>
-          {/* Sticky Bottom CTA */}
-          <div className='fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 lg:hidden'>
-            <div className='flex justify-center'>
-              <div className='w-full max-w-sm'>
-                <Button
-                  title='Gauti pasiūlymą'
-                  type='button'
-                  onClick={() => router.push('/kontaktai')}
-                  className='bg-button hover:bg-hover3 text-white'
-                />
               </div>
             </div>
           </div>

@@ -125,9 +125,9 @@ export default function Blog({ posts }) {
         description='Kelionių patarimai, įdomūs faktai ir naujienos'
         openGraph={{
           type: 'website',
-          locale: 'en_IE',
-          url: 'https://politravel.lt/',
-          site_name: 'PoliTravel',
+          locale: 'lt_LT',
+          url: 'https://politravel.lt/straipsniai',
+          site_name: 'PoliTravel.lt',
           images: [
             {
               url: 'https://res.cloudinary.com/dgsidhhur/image/upload/v1719670070/ecommerce-app/zx6rrkftwt5agzysa7tg.png',
@@ -231,76 +231,142 @@ export default function Blog({ posts }) {
               </div>
               {/* Pagination Controls */}
               {totalPages > 1 && (
-                <div className='flex justify-center items-center mt-10 gap-2 sm:gap-4'>
-                  <button
-                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                    disabled={currentPage === 1}
-                    className={`px-3 py-2 rounded-lg border border-gray-200 bg-white text-gray-700 font-semibold shadow-sm transition-all duration-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed`}
-                  >
-                    Ankstesnis
-                  </button>
-                  {/* Page numbers (show max 5, with ellipsis if needed) */}
-                  {(() => {
-                    const maxPagesToShow = 5;
-                    let start = 1;
-                    let end = totalPages;
-                    if (totalPages > maxPagesToShow) {
-                      if (currentPage <= 3) {
-                        start = 1;
-                        end = maxPagesToShow;
-                      } else if (currentPage >= totalPages - 2) {
-                        start = totalPages - maxPagesToShow + 1;
-                        end = totalPages;
-                      } else {
-                        start = currentPage - 2;
-                        end = currentPage + 2;
+                <div
+                  className='flex justify-center items-center mt-10 gap-2 sm:gap-4 overflow-x-auto max-w-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100'
+                  style={{ WebkitOverflowScrolling: 'touch' }}
+                >
+                  <div className='flex flex-nowrap'>
+                    <button
+                      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                      className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-gray-200 bg-white text-gray-700 font-semibold shadow-sm transition-all duration-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed`}
+                    >
+                      Ankstesnis
+                    </button>
+                    {/* Responsive pagination: mobile shows fewer pages */}
+                    {(() => {
+                      const isMobile =
+                        typeof window !== 'undefined' &&
+                        window.innerWidth < 640;
+                      const maxPagesToShow = isMobile ? 3 : 5;
+                      let start = 1;
+                      let end = totalPages;
+                      if (totalPages > maxPagesToShow) {
+                        if (isMobile) {
+                          // Always show first, last, and current +/-1
+                          if (currentPage <= 2) {
+                            start = 1;
+                            end = 3;
+                          } else if (currentPage >= totalPages - 1) {
+                            start = totalPages - 2;
+                            end = totalPages;
+                          } else {
+                            start = currentPage - 1;
+                            end = currentPage + 1;
+                          }
+                        } else {
+                          // Desktop logic (unchanged)
+                          if (currentPage <= 3) {
+                            start = 1;
+                            end = maxPagesToShow;
+                          } else if (currentPage >= totalPages - 2) {
+                            start = totalPages - maxPagesToShow + 1;
+                            end = totalPages;
+                          } else {
+                            start = currentPage - 2;
+                            end = currentPage + 2;
+                          }
+                        }
                       }
-                    }
-                    const pages = [];
-                    if (start > 1) {
-                      pages.push(
-                        <span
-                          key='start-ellipsis'
-                          className='px-2 text-gray-400'
-                        >
-                          ...
-                        </span>
-                      );
-                    }
-                    for (let i = start; i <= end; i++) {
-                      pages.push(
-                        <button
-                          key={i}
-                          onClick={() => setCurrentPage(i)}
-                          className={`px-3 py-2 rounded-lg border font-semibold mx-0.5 transition-all duration-200 ${
-                            i === currentPage
-                              ? 'bg-button text-white border-button shadow-md'
-                              : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                          }`}
-                          aria-current={i === currentPage ? 'page' : undefined}
-                        >
-                          {i}
-                        </button>
-                      );
-                    }
-                    if (end < totalPages) {
-                      pages.push(
-                        <span key='end-ellipsis' className='px-2 text-gray-400'>
-                          ...
-                        </span>
-                      );
-                    }
-                    return pages;
-                  })()}
-                  <button
-                    onClick={() =>
-                      setCurrentPage((p) => Math.min(totalPages, p + 1))
-                    }
-                    disabled={currentPage === totalPages}
-                    className={`px-3 py-2 rounded-lg border border-gray-200 bg-white text-gray-700 font-semibold shadow-sm transition-all duration-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed`}
-                  >
-                    Kitas
-                  </button>
+                      const pages = [];
+                      if (start > 1) {
+                        pages.push(
+                          <button
+                            key={1}
+                            onClick={() => setCurrentPage(1)}
+                            className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg border font-semibold mx-0.5 transition-all duration-200 ${
+                              1 === currentPage
+                                ? 'bg-button text-white border-button shadow-md'
+                                : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                            }`}
+                            aria-current={
+                              1 === currentPage ? 'page' : undefined
+                            }
+                          >
+                            1
+                          </button>
+                        );
+                        if (start > 2) {
+                          pages.push(
+                            <span
+                              key='start-ellipsis'
+                              className='px-2 text-gray-400'
+                            >
+                              ...
+                            </span>
+                          );
+                        }
+                      }
+                      for (let i = start; i <= end; i++) {
+                        if (i !== 1 && i !== totalPages) {
+                          pages.push(
+                            <button
+                              key={i}
+                              onClick={() => setCurrentPage(i)}
+                              className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg border font-semibold mx-0.5 transition-all duration-200 ${
+                                i === currentPage
+                                  ? 'bg-button text-white border-button shadow-md'
+                                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                              }`}
+                              aria-current={
+                                i === currentPage ? 'page' : undefined
+                              }
+                            >
+                              {i}
+                            </button>
+                          );
+                        }
+                      }
+                      if (end < totalPages) {
+                        if (end < totalPages - 1) {
+                          pages.push(
+                            <span
+                              key='end-ellipsis'
+                              className='px-2 text-gray-400'
+                            >
+                              ...
+                            </span>
+                          );
+                        }
+                        pages.push(
+                          <button
+                            key={totalPages}
+                            onClick={() => setCurrentPage(totalPages)}
+                            className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg border font-semibold mx-0.5 transition-all duration-200 ${
+                              totalPages === currentPage
+                                ? 'bg-button text-white border-button shadow-md'
+                                : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                            }`}
+                            aria-current={
+                              totalPages === currentPage ? 'page' : undefined
+                            }
+                          >
+                            {totalPages}
+                          </button>
+                        );
+                      }
+                      return pages;
+                    })()}
+                    <button
+                      onClick={() =>
+                        setCurrentPage((p) => Math.min(totalPages, p + 1))
+                      }
+                      disabled={currentPage === totalPages}
+                      className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-gray-200 bg-white text-gray-700 font-semibold shadow-sm transition-all duration-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed`}
+                    >
+                      Kitas
+                    </button>
+                  </div>
                 </div>
               )}
             </>

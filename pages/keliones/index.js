@@ -152,8 +152,8 @@ export default function Products({ allProducts = [] }) {
         description='Visos kelionės'
         openGraph={{
           type: 'website',
-          locale: 'en_IE',
-          url: 'https://politravel.lt/',
+          locale: 'lt_LT',
+          url: 'https://politravel.lt/keliones',
           site_name: 'PoliTravel.lt',
           images: [
             {

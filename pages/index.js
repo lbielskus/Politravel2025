@@ -10,6 +10,7 @@ import { DefaultSeo } from 'next-seo';
 import dynamic from 'next/dynamic';
 import { db } from '../lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
+import Head from 'next/head';
 
 const Hero1 = dynamic(() => import('../components/Hero1'), { ssr: false });
 const BlogSlide = dynamic(() => import('../components/BlogSlide'), {
@@ -35,30 +36,89 @@ export default function Home({
   const topBannerButton = topBanner?.route ? 'Plačiau' : 'Visos kelionės';
   const topBannerButtonLink = topBanner?.route || '/keliones';
 
+  // Structured data for the homepage
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'TravelAgency',
+    name: 'PoliTravel.lt',
+    description: 'Išskirtinės kelionių programos, norintiems atrasti daugiau.',
+    url: 'https://politravel.lt',
+    logo: 'https://res.cloudinary.com/dgsidhhur/image/upload/v1719670070/ecommerce-app/zx6rrkftwt5agzysa7tg.png',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'LT',
+      addressLocality: 'Vilnius',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      availableLanguage: 'Lithuanian',
+    },
+    sameAs: [
+      'https://www.facebook.com/politravel',
+      'https://www.instagram.com/politravel',
+    ],
+  };
+
   return (
     <>
+      <Head>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <link rel='canonical' href='https://politravel.lt' />
+      </Head>
       <DefaultSeo
-        title='PoliTravel.lt / Pagrindinis'
-        description='Išskirtinės kelionių programos, norintiems atrasti daugiau.'
+        title='PoliTravel.lt - Išskirtinės kelionių programos'
+        description='Atraskite nuostabias keliones su PoliTravel.lt. Išskirtinės kelionių programos, patikimi partneriai ir nepamirštami atsiminimai. Užsakykite kelionę jau šiandien!'
+        canonical='https://politravel.lt'
         openGraph={{
           type: 'website',
-          locale: 'en_IE',
+          locale: 'lt_LT',
           url: 'https://politravel.lt/',
           site_name: 'PoliTravel.lt',
+          title: 'PoliTravel.lt - Išskirtinės kelionių programos',
+          description:
+            'Atraskite nuostabias keliones su PoliTravel.lt. Išskirtinės kelionių programos, patikimi partneriai ir nepamirštami atsiminimai.',
           images: [
             {
               url: 'https://res.cloudinary.com/dgsidhhur/image/upload/v1719670070/ecommerce-app/zx6rrkftwt5agzysa7tg.png',
               width: 1200,
               height: 630,
-              alt: 'Politravel logo',
+              alt: 'PoliTravel.lt - Kelionių agentūra',
+              type: 'image/png',
             },
           ],
         }}
         twitter={{
-          handle: '@handle',
-          site: '@site',
+          handle: '@politravel',
+          site: '@politravel',
           cardType: 'summary_large_image',
         }}
+        additionalMetaTags={[
+          {
+            name: 'keywords',
+            content:
+              'kelionės, kelionių agentūra, kelionių programos, kelionės užsienį, kelionės Lietuvoje, PoliTravel, kelionių pasiūlymai',
+          },
+          {
+            name: 'author',
+            content: 'PoliTravel.lt',
+          },
+          {
+            name: 'robots',
+            content:
+              'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+          },
+        ]}
+        additionalLinkTags={[
+          {
+            rel: 'alternate',
+            hrefLang: 'lt',
+            href: 'https://politravel.lt',
+          },
+        ]}
       />
       <hr className='my-5 h-px border-0 bg-gray-300 ' />
       <Hero1

@@ -95,11 +95,7 @@ export default function BlogPost({ post }) {
                   {truncateTitle(post.title, 80)}
                 </h1>
 
-                {post.excerpt && (
-                  <p className='text-xl text-gray-600 leading-relaxed mb-8'>
-                    {post.excerpt}
-                  </p>
-                )}
+                {/* Removed excerpt paragraph as requested */}
               </div>
             </div>
 

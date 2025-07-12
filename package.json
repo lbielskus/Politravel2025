@@ -10,6 +10,8 @@
     "lint": "next lint",
     "build:scss": "sass styles/buttonStyles.scss styles/buttonStyles.css",
     "postbuild": "next-sitemap",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "generate-sitemap:prod": "NODE_ENV=production node scripts/generate-sitemap.js",
     "lighthouse": "lighthouse http://localhost:3000 --output html --output-path ./lighthouse-report.html"
   },
   "dependencies": {

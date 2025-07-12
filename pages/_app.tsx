@@ -51,27 +51,55 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo
-        title='VandensTalpos.lt'
-        description='Išskirtiniai plastikiniai gaminiai namams ir sodui'
+        title='PoliTravel.lt - Išskirtinės kelionių programos'
+        description='Atraskite nuostabias keliones su PoliTravel.lt. Išskirtinės kelionių programos, patikimi partneriai ir nepamirštami atsiminimai.'
+        canonical='https://politravel.lt'
         openGraph={{
           type: 'website',
-          locale: 'en_IE',
-          url: 'https://yourwebsite.com/',
-          site_name: 'Vandens Talpos',
+          locale: 'lt_LT',
+          url: 'https://politravel.lt/',
+          site_name: 'PoliTravel.lt',
+          title: 'PoliTravel.lt - Išskirtinės kelionių programos',
+          description:
+            'Atraskite nuostabias keliones su PoliTravel.lt. Išskirtinės kelionių programos, patikimi partneriai ir nepamirštami atsiminimai.',
           images: [
             {
-              url: 'https://res.cloudinary.com/dtv9ufmel/image/upload/v1712755967/ecommerce-app/nkdyueoqvtwbc215unry.png',
+              url: 'https://res.cloudinary.com/dgsidhhur/image/upload/v1719670070/ecommerce-app/zx6rrkftwt5agzysa7tg.png',
               width: 1200,
               height: 630,
-              alt: 'Roto image',
+              alt: 'PoliTravel.lt - Kelionių agentūra',
+              type: 'image/png',
             },
           ],
         }}
         twitter={{
-          handle: '@handle',
-          site: '@site',
+          handle: '@politravel',
+          site: '@politravel',
           cardType: 'summary_large_image',
         }}
+        additionalMetaTags={[
+          {
+            name: 'keywords',
+            content:
+              'kelionės, kelionių agentūra, kelionių programos, kelionės užsienį, kelionės Lietuvoje, PoliTravel, kelionių pasiūlymai',
+          },
+          {
+            name: 'author',
+            content: 'PoliTravel.lt',
+          },
+          {
+            name: 'robots',
+            content:
+              'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+          },
+        ]}
+        additionalLinkTags={[
+          {
+            rel: 'alternate',
+            hrefLang: 'lt',
+            href: 'https://politravel.lt',
+          },
+        ]}
       />
       <CartContextProvider>
         <Toaster position='top-center' />

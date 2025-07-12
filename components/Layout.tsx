@@ -33,8 +33,6 @@ const Layout = ({
         className={`gpu-accelerate min-h-screen max-w-screen-2xl mx-auto bg-background sm:px-6 ${className}`}
       >
         <Head>
-          <title>Your Website Title</title>
-          <meta name='description' content='Your website description' />
           <link rel='icon' href='/favicon.ico' />
 
           {/* Preload critical resources */}

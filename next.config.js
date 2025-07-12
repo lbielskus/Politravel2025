@@ -42,7 +42,7 @@ const nextConfig = {
   //   return config;
   // },
 
-  // Headers for caching and security
+  // Headers for caching, security, and SEO
   async headers() {
     return [
       {
@@ -60,6 +60,10 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
           },
+          {
+            key: 'X-Robots-Tag',
+            value: 'index, follow',
+          },
         ],
       },
       {
@@ -69,6 +73,10 @@ const nextConfig = {
             key: 'Cache-Control',
             value: 'public, max-age=3600, stale-while-revalidate=86400',
           },
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
         ],
       },
       {
@@ -77,6 +85,32 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/sitemap.xml',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/xml',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      {
+        source: '/robots.txt',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/plain',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=86400',
           },
         ],
       },

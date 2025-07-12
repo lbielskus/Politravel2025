@@ -10,9 +10,9 @@ const ApieMus = () => {
         description='Apie mus'
         openGraph={{
           type: 'website',
-          locale: 'en_IE',
-          url: 'https://politravel.lt/',
-          site_name: 'PoliTravel',
+          locale: 'lt_LT',
+          url: 'https://politravel.lt/apie-mus',
+          site_name: 'PoliTravel.lt',
           images: [
             {
               url: 'https://res.cloudinary.com/dgsidhhur/image/upload/v1719670070/ecommerce-app/zx6rrkftwt5agzysa7tg.png',
